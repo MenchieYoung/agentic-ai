@@ -1,0 +1,58 @@
+0:03
+In this video, we'll look in detail at how to prompt an arm to generate a plan,
+0:03
+and how to read, interpret, and execute that plan. Let's dive in.
+0:08
+This is a plan that you saw in the previous video for the customer service agents,
+0:12
+and I have presented this plan at a high level using simple text descriptions.
+0:17
+Let's take a look at how you can get an arm to write very clear plans that go a little bit
+0:22
+beyond these simple high-level text descriptions. It turns out that many developers will ask an arm
+0:30
+to format the plan it once executed in JSON format, because this allows downstream code
+0:36
+to parse what exactly are the steps of the plan in relatively clear and unambiguous ways,
+0:41
+and all of the leading arms are pretty good at generating JSON outputs at this point.
+0:46
+So the system prompt might say something like this. You have access to the following tools,
+0:51
+and then create a step-by-step plan in JSON format, and you might describe the JSON format
+0:56
+in enough detail with the goal of getting it to output a plan like that shown here on the right.
+1:01
+So in this JSON output, it creates a list where the first list item has clear keys and values
+1:08
+that say step one of the plan has the following description, and it should use the following tool
+1:15
+with the following arguments parsed to that tool. Then after that, step two of the plan
+1:19
+is to carry out this task, and then to use this tool, and so on. So this JSON format,
+1:24
+as opposed to writing the plan in English, allows downstream code to more clearly parse out exactly
+1:31
+what are the steps of the plan so that it can be reliably executed one step at a time.
+1:36
+Instead of JSON, I also see some developers use XML, where you can use XML delimiters,
+1:43
+use XML tags to clearly specify what are the steps of the plan and what step number it is.
+1:49
+Some developers, I feel like fewer developers, will use markdown, which is just sometimes
+1:54
+slightly more ambiguous in terms of how we parse it, and I think plain text is maybe the least
+1:59
+reliable of these options. But I think either JSON, which I'm showing here, or XML would be
+2:04
+good options for how to ask the LLM to format a plan unambiguously. So that's it. By opening
+2:11
+plans in JSON, you can then parse it and have downstream workflows execute different steps of
+2:17
+the plan more systematically. Now, in terms of getting LLMs to plan, it turns out there's one
+2:24
+other really neat idea that lets an LLM output very complex plans and get them executed reliably,
+2:30
+and that's to allow them to write code and to have code express the plan.
+2:35
+Let's take a look at this in the next video.

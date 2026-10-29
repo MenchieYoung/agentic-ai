@@ -1,0 +1,220 @@
+0:06
+An agentic workflow may comprise many different types of components, and so your tools for
+0:04
+improving different components will be pretty different. But I'd like to share with you some
+0:09
+general patterns I've seen. Some components in your agentic workflow will be non-LLM-based,
+0:14
+so it may be something like a web search engine or a text retrieval component,
+0:19
+if that's part of your RAG or Retrieval Augmented Generating System, something for code execution,
+0:24
+or maybe with a separately trained machine learning model, maybe for speech recognition
+0:28
+or detecting people in pictures, and so on. So sometimes these non-LLM-based components will
+0:34
+have parameters or hyperparameters that you can tune. So for web search, you can tune things like
+0:38
+the number of results or maybe the date range that you ask the web search engine to consider.
+0:43
+For a RAG text retrieval component, you might change the similarity threshold that determines
+0:48
+what pieces of text it considers similar, or the chunk size. Often RAG systems will take text and
+0:54
+chop it up into smaller chunks for matching, so the main hyperparameters you could use. Or for
+0:59
+people detection, you might change the detection threshold, so how sensitive it is and how likely
+1:04
+it is to declare this found a person, and this will trade off the false positives and false
+1:08
+negatives. If they follow all the details of the hyperparameters I just discussed, don't worry
+1:12
+about it, the details aren't that important, but often the components were parameters that
+1:16
+you can tune. And then of course, you can also try to replace the component. I do this a lot
+1:21
+in my agentic workflows, where I'll swap in different RAG search engines or swap in different
+1:26
+RAG providers and so on, just to see if some other provider might work better. Because of the
+1:31
+diversity of non-LM-based components, I think the techniques for how to improve it will be
+1:36
+more diverse and dependent on exactly what that component is doing. For an LM-based component,
+1:43
+here are some options you might consider. One would be to try to improve your prompts, so maybe
+1:49
+try to add more explicit instructions. Or if you know what few-shot prompting is, that refers to
+1:54
+adding one or more concrete examples of an example of an input and a desired output. And so few-shot
+2:00
+prompting, which you can learn about from some deep learning short courses as well, is a technique
+2:05
+that can give your LM some examples to hopefully help it get better performing outputs written. Or
+2:12
+you can also try a different LM. So with AI Suite or other tools, it could be pretty easy to try
+2:18
+multiple LMs and then you can use evals to pick the best model for your application. Sometimes, if a
+2:25
+single step is too complex for one LM to do, you can consider if you want to decompose the task
+2:30
+into smaller steps or maybe decompose it into a generation step and then a reflection step. But
+2:35
+more generally, if you have instructions that are very complex all within one step, maybe a single
+2:40
+LM has a hard time following all those instructions and you can break the task down to smaller steps.
+2:45
+That may be easier for, say, two or three calls to carry out accurately. And lastly, something to
+2:52
+try when the other methods aren't working well enough is to consider fine-tuning a model. This
+2:58
+tends to be quite a bit more complex than the other options, so it can be quite a bit more
+3:02
+expensive as well in terms of developer time to implement. But if you have some data that you can
+3:07
+use to fine-tune an LM on, that could give you much better performance than prompting alone. So I tend
+3:15
+not to fine-tune a model until I've really exhausted the other options because fine-tuning
+3:20
+tends to be quite complex. But for applications where after trying everything else, if I'm still
+3:25
+at, say, 90% performance or 95% performance and I really need to eke out those last few
+3:31
+percentage points of improvement, then sometimes fine-tuning my own custom model is a great
+3:36
+technique to use. I tend to do this only on the more mature applications because of how costly it
+3:43
+turns out that when you're trying to choose an LM to use, one thing that's very hopeful for you as
+3:49
+a developer is if you have good intuitions about how intelligent or how capable different large
+3:54
+language models are. One thing you can do is just try a lot of models and see what works best. I
+3:58
+find that as I work with different models, I start to hone intuitions about which models work best
+4:03
+for what types of tasks. And when you hone those intuitions, you can be more efficient as well in
+4:08
+writing good prompts for the model as well as choosing good models for your tasks. So I'd like
+4:13
+to share with you some thoughts on how to hone your intuition on what models will work well for
+4:19
+your application. Let's illustrate this with an example of using an LM to follow instructions to
+4:25
+remove or to redact PII or personally identifiable information. So get on to remove private sensitive
+4:32
+information. For example, if you are using an LM to summarize customer calls, then maybe one
+4:39
+summary is on July 14th, 2023, Jessica Alvarez with a social security number and a certain
+4:44
+address, a business support ticket, and so on. So this piece of text has a lot of sensitive,
+4:49
+personally identifiable information. Now, let's say we want to remove all PII from such summaries
+4:56
+because we want to use the data for downstream statistical analysis of what customers are
+5:01
+calling about. And to protect customer information, we want to strip out that PII before we do that
+5:05
+downstream statistical analysis. So you might prompt an LM with instructions to identify all
+5:12
+cases of PII in the text below and then return the redacted text with redacted colon and so on.
+5:19
+It turns out that the larger frontier models tend to be much better at following instructions,
+5:26
+whereas the smaller models tend to be pretty good at answering simple factual questions,
+5:30
+but are just not as good at following instructions. If you run this prompt on the smaller
+5:35
+model, the OpenWay Lama 3.1 model with abling parameters, then it may generate an output like
+5:41
+this. It says, the identified PII is social security number and address, and then it redacts
+5:46
+it as follows and so on. And it actually makes a few errors. It didn't follow the instructions
+5:51
+properly. It showed the list, then redacted the text, then returned another list, which it wasn't
+5:57
+supposed to. And in this list of PII, it missed the name. And then I think it also didn't redact
+6:02
+partly the address. So details aren't important, but it didn't follow these instructions perfectly,
+6:07
+and maybe it missed a little bit of PII. In contrast, if you use a more intelligent model,
+6:12
+one that's better at following instructions, you may get a better result like this,
+6:16
+where it's actually correctly listed all the PII and correctly redacted all of the PII.
+6:22
+And so I find that as different OM providers specialize on different tasks, different models
+6:28
+really are better for different tasks. Some are better at coding, some are better at following
+6:32
+instructions, some are better at certain niche types of facts. And if you can hold your intuition
+6:37
+for what models are more or less intelligent and what type of instructions they're more or less
+6:43
+able to follow, then you'll be able to make better decisions as to what models to use.
+6:47
+So to share a couple tips on how to do this, I encourage you to play with different models
+6:52
+often. So whenever there's a new model release, I'll often go try it out and try out different
+6:57
+queries on it, both closed-weight proprietary models as well as open-weight models. And I find
+7:03
+that sometimes having a personal set of evals might also be helpful, where there's a set of
+7:07
+things you ask a lot of different models that might help you calibrate how well they do on
+7:11
+different types of tasks. One other thing that I do a lot that I hope will be useful to you is
+7:17
+I spend a lot of time reading other people's prompts. So sometimes people publish their prompts
+7:23
+on the internet, and I'll often go and read them to understand what best practices in prompting
+7:28
+look like. Or I'll often chat to my friends at various companies, including some of the
+7:32
+frontier model companies, and share my prompts with them, take a look at how they prompt.
+7:37
+And sometimes I'll also go to open-source packages written by people I really respect,
+7:42
+and download the open-source package and dig through that open-source package to find the
+7:47
+prompts the authors have written in order to read it, in order to hold my intuition about how to
+7:52
+write good prompts. This is one technique that I encourage you to consider, is by reading lots of
+7:57
+other people's prompts that will help you get better at writing prompts yourself. And I certainly
+8:03
+do this a lot, and I encourage you to do so too. And this will hone your intuition about what types
+8:09
+of instructions models are good at following, and when to say certain things to different models.
+8:14
+In addition to playing with models and reading other people's prompts,
+8:17
+if you try out lots of different models in your agentic workflows, that also lets you hone your
+8:22
+intuition. So you see which models work best for which types of tasks, and either looking at traces
+8:29
+to get it in a formal sense, or looking at either component-wise or end-to-end evals can help you
+8:34
+assess how well different models are working for different parts of your workflow. And then you
+8:38
+start to hone intuitions about not just performance, but maybe also price and speed trade-offs for the
+8:45
+use of different models. And one of the reasons I tend to develop my agentic workflows with AI Suite
+8:50
+is because it then makes it easy to quickly swap out and try out different models. And this makes
+8:55
+me more efficient in terms of trying out and assessing which models work best for my workflow.
+9:01
+So we've talked a lot about how to improve the performance of different components to hopefully
+9:07
+improve the overall performance of your end-to-end system. In addition to improving the quality of
+9:14
+the output, one other thing you might want to do in your workflows is to optimize the latency as
+9:19
+well as cost. I find that for a lot of teams, when you start developing, usually the number one thing
+9:24
+to worry about is just are the outputs sufficiently high quality. But then when the system is working
+9:31
+well and you put it into production, then there's often value to make it run faster as well as run
+9:36
+at lower cost as well. So in the next video, let's take a look at some ideas for improving
+9:42
+cost and latency for agentic workflows.

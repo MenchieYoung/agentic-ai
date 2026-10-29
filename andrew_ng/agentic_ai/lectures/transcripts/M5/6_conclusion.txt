@@ -1,0 +1,42 @@
+0:04
+Welcome to the final video of this course. It feels like we've been through a lot together,
+0:04
+just you and me, and we've gone through a lot of topics in agentic AI. Let's take a look.
+0:09
+In the first module, we talked about what are the applications you can build with agentic AI
+0:14
+that just were not possible before. And we started then to look at key design patterns,
+0:21
+including the reflection design pattern, which is a simple way to sometimes give your application a
+0:27
+nice performance boost, and then tool use or function calling, which expands what your LM
+0:32
+application can do, with code execution being one important case of that. And then we spent a lot of
+0:37
+time talking about evaluations, as well as error analysis, and how to drive a disciplined process
+0:44
+of building, as well as analyzing, to be efficient in how you keep on improving the performance of
+0:50
+your agentic AI system. This fourth module is some of the material that I think you will find
+0:55
+most useful as you keep building agentic AI systems, I hope, for a long time. And then in
+1:01
+this module, we talk about planning and multi-agent systems that can let you build much more powerful,
+1:07
+although sometimes harder to control and harder to predict in advanced types of systems. So with
+1:13
+the skills you learn from this course, I think you now know how to build a lot of cool, exciting
+1:18
+agentic AI applications. When my team, or I see other teams as well, interview people for jobs,
+1:24
+I find interviews often try to assess whether or not candidates have pretty much the skills you're
+1:31
+learning about in this course. And so I hope that this course also opens up new professional
+1:36
+opportunities for you, and you should do more. Whether you're doing these things for fun, or for
+1:42
+professional practical settings, I think you'll enjoy this new set of things you can now build.
+1:49
+So, just to wrap up, I want to thank you again for spending all this time with me,
+1:54
+and I hope you will take these skills, use them responsibly, and just go build cool stuff.

@@ -1,0 +1,162 @@
+0:00
+Let's take a look at some examples of Agentic AI applications.
+0:04
+One task that many businesses carry out is invoice processing.
+0:09
+So given an invoice like this, you might want to write software to extract the most important
+0:14
+fields, which for this application, let's say is the biller, that would be tech flow solutions,
+0:19
+the biller address, the amount due, which is $3,000, and the due date, which looks like it is
+0:25
+August 20th, 2025. So in many finance departments, maybe a human would look at invoices and identify
+0:33
+the most important fields, who do we need to pay by when, and record these in a database to make
+0:39
+sure that payment is issued in time. If you were to implement this with an agentic workflow,
+0:44
+you might do so like this. You write input an invoice, then call a PDF to text conversion API
+0:51
+to turn the PDF into maybe formatted text, such as markdown text for the LLM to ingest. Then the LLM
+0:57
+will look at the PDF and figure out, is this actually an invoice or is this some other type
+1:02
+of document that they should just ignore? And if it is an invoice, then it will pull up the required
+1:07
+fields as well as use an API or use a tool to update the database in order to save the most
+1:14
+important fields in the database records. So one aspect of this agentic workflow is that
+1:20
+there is a clear process to follow, is identify the required fields and record in the database.
+1:26
+Tasks like these with a clear process you want followed tend to be maybe easier for agentic
+1:31
+workflows to carry out because it leads to a relatively step-by-step way to reliably carry
+1:36
+out this task. Here's another example, maybe just a little bit harder. So if you want to build an
+1:41
+agent to respond to basic customer order inquiries, then the steps might be to extract the key
+1:48
+information, so figure out what exactly did the customer order, what's the customer's name, then
+1:53
+look up the relevant customer records, and then finally draft a response for human to review before
+2:00
+the email response is sent to the customer. So again, there's a clear process here and we
+2:04
+will implement this step-by-step, where we take the email, feed it to an LLM to verify or to extract
+2:10
+the order details, and assuming the customer email is about an order, the LLM might then choose to
+2:16
+call an order's database to then pull up that information. That information then goes to the LLM
+2:22
+to then draft an email response, and the LLM might choose to use a request review tool that, say, puts
+2:29
+this draft email from the LLM into queue for humans to review, so they can then be sent out after a
+2:34
+human has reviewed and approved it. So customer order inquiry agents like these are being built
+2:40
+and deployed in many businesses today. To look at a more challenging example, if you want to build a
+2:45
+customer service agent to respond not just to questions about an order they place, but to respond
+2:51
+to a more general set of questions, anything a customer may ask, and maybe the customer will ask,
+2:57
+do you have any black jeans or blue jeans? And to answer this question, you need to maybe make
+3:03
+multiple API calls to your database to first check the inventory for black jeans, then check inventory
+3:08
+for blue jeans, and then respond to the customer. So this is an example of a more challenging query,
+3:14
+where given a user input, you actually have to plan out what is the sequence of database queries
+3:19
+to check for inventory. Or if a user asks, I'd like to return the beach towel I bought, then to answer
+3:25
+this, maybe we need to verify that the customer actually bought a beach towel, and then double
+3:31
+check the return policy. Maybe our set returns only 30 days within the date of purchase, and only the
+3:36
+towel was unused. And if return is allowed, then have the agent issue a return packing slip, and
+3:42
+also set the database record to return pending. So in this example, if the required steps to process
+3:48
+the customer requests are not known ahead of time, then it results in a more challenging process,
+3:54
+where the LLM base application has to decide for itself that these are the three steps needed in
+4:00
+order to respond appropriately to this task. But you learn about some of the latest work on how to
+4:06
+approach this type of problem too. And to give one last example of maybe an especially difficult
+4:12
+type of agent to build, there's a lot of work on computer use by agents, in which agents will
+4:17
+attempt to use a web browser and read a web page to figure out how to carry out a complex task.
+4:24
+In this example, I've asked an agent to check whether seats are available on two specific United
+4:30
+Airlines flights from San Francisco to Washington DC, or the DCA airport. The agent has access to
+4:36
+a web browser they can use to carry out this task. And in the video here, you can see it navigating
+4:41
+the United website independently, clicking on page elements and filling in the text fields on the page
+4:46
+to carry out the search that I requested. As it works, the agent reasons over the content of the
+4:52
+page to figure out the actions it needs to take to complete the task, and what it should do next.
+4:57
+In this case, there's some trouble checking flights on the United site, and instead decides to
+5:02
+navigate to the Google Flights website to search for available flights. On the Google Flight, you
+5:08
+see here it finds several flight options that match the user's query, and the agent then picks one and
+5:13
+is taken back to the United website, where it looks like it's now on the correct web page, and so is
+5:20
+able to determine that yes, there are seats available on the flights that I asked about. So computer use
+5:26
+is an exciting cutting-edge area of research right now, and many companies are trying to get computer
+5:30
+use agents to work. While the agent you saw here did eventually figure out the answer, I often see
+5:36
+agents having trouble using web browsers well. For example, if a web page is slow to load, an agent
+5:42
+may fail to understand what's going on, and many web pages are still beyond agents' abilities to
+5:47
+pause or to read accurately. But I think computer use agents, even though not yet reliable enough
+5:53
+to use mission-critical applications today, are an exciting and important area of future development.
+5:58
+So when I'm considering building Agentic AI workflows, the tasks that are easier will tend to be ones
+6:05
+where there is a clear step-by-step process, or if a business already has a standard procedure, a
+6:11
+standard offering procedure to follow, and then it can be quite a lot of work to take that procedure
+6:15
+and codify it up in an AI agent, but that tends to lead to easier implementations. One thing that
+6:21
+makes it easier is if you are using text-only assets, because LLM/language models have
+6:27
+grown up really processing text, and if you need to process other input modalities, it may well be
+6:33
+doable, but it maybe gets a little bit harder. And on the harder end of the spectrum, if the steps are
+6:38
+not known ahead of time of what's needed to carry out a task, like you saw for the more advanced
+6:42
+customer service agent, then the agent may need to plan or solve as you go, and this tends to be
+6:47
+harder and more unpredictable and less reliable. And then as mentioned, if it needs to accept rich
+6:52
+multi-modal inputs such as sound, vision, audio, that also tends to be less reliable than the
+6:58
+only header process text. So I hope that gives you a sense of the types of applications you might build
+7:05
+with agentic workflows. When implementing one of these things yourself, one of the most important
+7:10
+skills is to look at a complex workflow and figure out what are the individual steps so you can
+7:16
+implement an agentic workflow to execute those steps one at a time. In the next video, we'll talk
+7:22
+about task decomposition, that is, given a complex thing you want to do, like write a research report
+7:28
+or have a customer agent get back to customers, how do you break that down into discrete steps
+7:34
+to try to implement an agentic workflow? Let's go see that in the next video.

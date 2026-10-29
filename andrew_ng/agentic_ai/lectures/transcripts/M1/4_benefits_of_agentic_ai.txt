@@ -1,0 +1,98 @@
+0:03
+I think the one biggest benefit of agentic workflows is that it allows you to do many
+0:03
+tasks effectively that just previously were not possible. But there are other benefits as well,
+0:09
+including parallelism that lets you do certain things quite fast, as well as modularity that
+0:14
+lets you combine the best of three components from many different places to build an effective
+0:19
+workflow. Let's take a look. My team collected some data on a coding benchmark that tests the
+0:25
+ability of different LLMs to write code to carry out certain tasks. The benchmark used in this case
+0:31
+is called Human Eval, and it turns out that GPT 3.5, this is a model that the first publicly
+0:37
+available version of Chai GPT was based on, if asked to write the code directly, to just type
+0:42
+out the computer program, gets 40% right on this benchmark. This is a positive k-metric. GPT 4 is
+0:48
+a much better model. Its performance leaps to 67% with this also non-agentic workflow. But it turns
+0:55
+out that as large as the improvement was from GPT 3.5 to GPT 4, that improvement is dwarfed by what
+1:02
+you can achieve by wrapping GPT 3.5 within an agentic workflow. Using different agentic techniques,
+1:09
+which you'll learn about later in this course, you can prompt GPT 3.5 to write code and then maybe
+1:15
+reflect on the code and figure out if you can improve it. And using techniques like that, you can
+1:19
+actually get GPT 3.5 to get much higher levels of performance. And similarly, GPT 4 used in the
+1:26
+context of an agentic workflow also does much better. So even with today's best LLMs, an agentic
+1:33
+workflow lets you get much better performance. And in fact, what we saw in this example was the
+1:39
+improvement from one generation of model to another, which is huge, is still not as big a difference as
+1:45
+implementing an agentic workflow on the previous generation of model. Another benefit of using
+1:50
+agentic workflows is that they can parallelize some tasks and thus do certain things much faster
+1:57
+than a human. For example, if you ask an agentic workflow to write an essay about black holes, you
+2:03
+might be able to have three LLMs run in parallel to generate ideas for web search terms to type
+2:09
+into the search engine. Based on the first web search, it may identify, say, three top results to
+2:15
+fetch. And based on the second web search, it may identify a second set of web pages to fetch and so
+2:21
+on. And it turns out that whereas a human doing this research would have to read these nine web
+2:27
+pages sequentially or one at a time, when you're using an agentic workflow, you can actually
+2:32
+parallelize all nine web page downloads and then finally feed all these things into an LLM to write
+2:39
+an essay. So even though agentic workflows do take longer than truly non-agentic workflows or by
+2:45
+direct generation by just prompting a single time, if you were to compare this type of agentic
+2:50
+workflow to how a human would have to go about the task, the ability to parallelize downloading lots
+2:55
+of web pages can actually let it do certain tasks much faster than the non-parallel sequential way
+3:01
+that a single human might process this data. To build on this example, it turns out one of the
+3:07
+things I often do when building agentic workflows is look at the individual components like the LLM
+3:13
+and add or swap out components. So for example, maybe I look at the web search engine I use up
+3:19
+here and I might decide that I want to soften a new web search engine. When building agentic
+3:24
+workflows, there are actually multiple web search engines including Google, which you can access
+3:28
+by a server, as well as others like Bing, DuckDuckGo, Tivili, u.com. There are actually quite a lot of
+3:35
+options for web search engines designed for LLMs to use. Or maybe instead of just doing three web
+3:40
+searches, maybe on this step we can swap in a new news search engine so we can find out what's the
+3:46
+latest news on recent breakthroughs on black hole science. And lastly, instead of using the same LLM
+3:54
+for all of the different steps, I will often try out different large language models and maybe try
+4:00
+out different LLM providers to see which one gives the best result for different steps of this system.
+4:07
+So to summarize, the main reason I use agentic workflows is it just gives much better performance
+4:12
+on many different applications. But in addition, it can also paralyze some tasks that humans would
+4:19
+otherwise have to do sequentially. And the modular design of many agentic workflows also lets us
+4:26
+add or update tools and sometimes swap out models. We've talked a lot about the key components of
+4:32
+building agentic workflows. Let's now take a look at a range of agentic AI applications to give you
+4:38
+a sense of the sorts of things people are already building and the sorts of things
+4:42
+you build about yourself. Let's go on to the next video.

@@ -1,0 +1,96 @@
+0:01
+When you have a team of people working together, the patterns by which they communicate can be
+0:05
+quite complex. And in fact, designing an organizational chart is actually pretty
+0:10
+complex to try to figure out what's the best way for people to communicate, to collaborate.
+0:15
+It turns out, designing communication patterns for multi-agent systems is also quite complex.
+0:21
+But let me show you some of the most common design patterns I see used by different teams today.
+0:26
+In a marketing team with a linear plan, where first a researcher worked, then a graphic designer,
+0:31
+then a writer, the communication pattern was linear. The researcher would communicate with
+0:36
+the graphic designer, and then both the researcher and the graphic designer made
+0:39
+possible outputs to the writer. And so there's a very linear communication pattern.
+0:43
+This is one of the two most common communication plans that I see being used today.
+0:49
+The second of the two most common communication plans would be similar to what you saw in
+0:55
+this example, with planning using multiple agents, where there is a manager that communicates with a
+1:03
+number of team members and coordinates their work. So in this example, the marketing manager decides
+1:08
+to call on the researcher to do some work. Then if you think of the marketing manager as getting
+1:13
+the report back and then sending it to the graphic designer, getting the report back and sending it to
+1:17
+the writer, this would be a hierarchical communication pattern. If you're actually implementing a hierarchical
+1:24
+communication pattern, it'll probably be simpler to have the researcher pass the report back to the
+1:28
+marketing manager rather than the researcher pass the results directly to the graphic designer and
+1:33
+to the writer. But so this type of hierarchy is also a pretty common way to plan the communication
+1:39
+patterns, where you have one manager coordinating the work of a number of other agents. And just to share
+1:45
+with you some more advanced and less frequently used, but nonetheless sometimes used in practice
+1:50
+communication patterns, one would be a deeper hierarchy where, same as before, if you have a
+1:55
+marketing manager send tasks to a researcher, graphic designer, writer, but maybe the researcher has
+2:01
+themselves two other agents that they call on, such as a web researcher and a fact checker. Maybe the
+2:06
+graphic designer just works by themselves, whereas the writer has an initial style writer and a
+2:11
+citation checker. So this would be a hierarchical organization of agents in which some agents might
+2:19
+themselves call other sub-agents. And I also see this used in some applications, but this is much
+2:24
+more complex than a one-level hierarchy, so used less often today. And then one final pattern that is
+2:31
+quite challenging to execute, but I see a few experimental projects use it, is the all-to-all
+2:38
+communication pattern. So in this pattern, anyone is allowed to talk to anyone else at any time. And
+2:43
+the way you implement this is you prompt all four of your agents, in this case, to tell them that there
+2:50
+are three other agents they could decide to call on. And whenever one of your agents decides to
+2:55
+send a message to another agent, that message gets added to the receiver agent's contacts. And then a
+3:02
+receiver agent can think for a while and decide when to get back to that first agent. And so if
+3:07
+you all collaborate in a crowd and talk to each other for a while until, say, each of them declares
+3:13
+that it is done with this task, and then it starts talking. And maybe when everyone thinks it's done,
+3:17
+or maybe when the writer concludes it's good enough, that's when you generate the final output.
+3:22
+In practice, I find the results of all-to-all communication patterns a bit hard to predict, so
+3:27
+some applications don't need high control. You can run it and see what you get. If the marketing
+3:32
+brochure isn't good, maybe that's okay. You just run it again and see if you get a different result.
+3:36
+But I think for applications where you're willing to tolerate a little bit of chaos and unpredictability,
+3:42
+I do see some developers using this communication pattern. So that, I hope, conveys some of the
+3:48
+richness of multi-agentic systems. Today, there are quite a lot of software frameworks as well
+3:54
+that support easily building multi-agent systems. And they also make implementing some of these
+4:00
+communication patterns relatively easy. So maybe if you use your own multi-agent system, you'll find
+4:06
+some of these frameworks hopeful for exploring these different communication patterns as well.
+4:10
+And so that now brings us to the final video of this module and of this course.
+4:19
+Let's go on to the final video to wrap up.

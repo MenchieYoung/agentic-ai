@@ -1,0 +1,9 @@
+# macOS
+.DS_Store
+
+# JetBrains IDE
+.idea/
+*.iml
+
+# AI-generated backup (not part of the curated materials)
+andrew_ng/agentic_ai/practice_backup_AI_GENERATED_20261026_120710/

@@ -1,0 +1,158 @@
+0:03
+I've worked with many different teams on building agentic workflows, and I've found that one
+0:04
+of the biggest predictors for whether someone is able to do it really well versus be less
+0:10
+efficient at it is whether or not they're able to drive a really disciplined evaluation
+0:15
+process.
+0:16
+So, your ability to drive evals for your agentic workflow makes a huge difference in your ability
+0:23
+to build them effectively.
+0:25
+In this video, we'll take a quick overview of how to build evals, and this is a subject
+0:30
+that we'll actually go into much deeper in a later module in this course.
+0:34
+So, let's take a look.
+0:36
+After building an agentic workflow like this one for responding to customer order inquiries,
+0:42
+it turns out that it's very difficult to know in advance what are the things that could
+0:47
+go wrong.
+0:48
+And so, rather than trying to build evaluations in advance, what I recommend is you just look
+0:53
+for the outputs and manually look for things that you wish it was doing better.
+0:59
+For example, maybe you read a lot of outputs and find that it is unexpectedly mentioning
+1:04
+your competitors more than it should.
+1:07
+Many businesses don't want their agents to mention competitors because it just creates
+1:11
+an awkward situation.
+1:13
+And if you read some of these outputs, maybe you find that it sometimes says, I'm glad
+1:17
+you shopped with us.
+1:18
+We're much better than our competitor, ComproCo.
+1:20
+Or maybe sometimes they say, sure, it should be fun.
+1:22
+Unlike RivalCo, we make returns easy.
+1:25
+And you may look at this and go, gee, I really don't want this to mention competitors.
+1:30
+This is an example of a problem that is really hard to anticipate in advance of building
+1:35
+this agentic workflow.
+1:36
+So, the best practice is really to build it first and then examine it to figure out where
+1:41
+it is not yet satisfactory, and then to find ways to evaluate as well as improve the system
+1:47
+to eliminate the ways that it is still not yet satisfactory.
+1:51
+If building your business considers it an error or a mistake to mention competitors
+1:56
+in this way, then as you work on eliminating these competitor mentions, one way to track
+2:02
+progress is to add an evaluation or an eval to track how often this error occurs.
+2:08
+So, if you have a named list of competitors like ComproCo, RivalCo, the other co, then
+2:13
+you can actually write codes to just search in your own output for how often it mentions
+2:19
+these competitors by name and count up as a number, as a fraction of the overall responses,
+2:25
+how frequently it mistakenly mentions competitors.
+2:29
+One nice thing about the problem of competitor mentions is it's an objective metric, meaning
+2:35
+either the competitor was mentioned or not.
+2:37
+And for objective criteria, you can write code to check for how often this specific
+2:44
+error occurs.
+2:46
+But because LLMs output free text, there are also going to be criteria by which you want
+2:51
+to evaluate this output that may be more subjective and where it's harder to just write code to
+2:57
+output a black and white score.
+2:58
+In this case, using a LLM as a judge is a common technique to evaluate the output.
+3:05
+So, for example, if you're building a research agent to do research on different topics,
+3:10
+then you can use another LLM and prompt it to maybe, say, assign the following essay
+3:15
+a quality score between 1 and 5, where 1 is the worst and 5 is the best essay.
+3:21
+Here, I'm using a Python expression to mean copy-paste the generated essay into this.
+3:27
+So, you can prompt the LLM to read the essay and assign it a quality score.
+3:32
+Then I'm going to ask the research agent to write a number of different research reports,
+3:36
+for example, on recent developments in black hole science or using robots to harvest fruit.
+3:42
+And then in this example, maybe the judge LLM assigns the essay on black holes a score
+3:48
+of 3, the essay on robot harvesting a score of 4, and as you work on improving your research
+3:53
+agent, hopefully you see these scores go up over time.
+3:57
+It turns out, by the way, that LLMs are actually not that good at these 1 to 5 scale ratings.
+4:03
+You can give it a shot, but I personally tend not to use this technique that much myself.
+4:07
+But in a later module, you'll learn some better techniques to have an LLM output more accurate
+4:12
+scores than asking it to output scores on a 1 to 5 scale, although some people will
+4:17
+do this, maybe at an initial cut as an LLM as judge type of eval.
+4:21
+Just to give a preview of some of the agentic AI evals you'll learn about later in this course,
+4:27
+you've already heard me talk about how you can write codes to evaluate objective criteria,
+4:32
+such as did it mention a competitor or not, or use an LLM as a judge for more subjective
+4:36
+criteria such as what's the quality of this essay.
+4:39
+But later, you learn about two major types of evals.
+4:41
+One is end-to-end, where you measure the output quality of the entire agent, as well as component
+4:47
+level evals, where you might measure the quality of the output of a single step in the agentic
+4:52
+workflow.
+4:53
+It turns out that these are useful for driving different parts of your development process.
+4:58
+One thing I do a lot as well is just examine the intermediate outputs, or sometimes we
+5:03
+call this the traces of the LLM, in order to understand where it is falling short of
+5:08
+my expectations.
+5:09
+And we call this error analysis, where we just read through the intermediate outputs
+5:13
+of every single step to try to spot opportunities for improvement.
+5:17
+And it turns out being able to do evals and error analysis is a really key skill.
+5:21
+So we have much more to say about this in the fourth module in this course.
+5:26
+We're nearly to the end of this first module.
+5:29
+Before moving on, I just want to share with you what I think are the most important design
+5:32
+patterns for building agentic workflows.
+5:35
+Let's go take a look at that in the next video.

@@ -1,0 +1,320 @@
+0:05
+In this module, I'd like to share with you practical tips for building agentic AI workflows.
+0:04
+I hope that these tips will enable you to be much more effective than the typical developer
+0:10
+at building these types of systems. I find that when developing an agentic AI system,
+0:15
+it's difficult to know in advance where it will work and where it won't work so well,
+0:20
+and thus where you should focus your effort. So very common advice is to try to build even a
+0:27
+quick and dirty system to start, so you can then try it out and look at it to see where it may not
+0:33
+yet be working as well as you wish, to then have much more focused efforts to develop it even
+0:39
+further. In contrast, I find that it's sometimes less useful to sit around for too many weeks
+0:45
+theorizing and hypothesizing how to build it. It's often better to just build a quick system in a
+0:52
+safe, reasonable way that doesn't leak data, kind of do it in a responsible way, but just build
+0:57
+something quickly so you can look at it and then use that initial prototype to prioritize and try
+1:03
+further development. Let's start with an example of what might happen after you've built a prototype.
+1:09
+I want to use as our first example the invoice processing workflow that you've seen previously,
+1:15
+with the task to extract four required fields and then to save it to a database record. After having
+1:21
+built such a system, one thing you might do is find a handful of invoices, maybe 10 or 20 invoices,
+1:27
+and go through them and just take a look at their output and see what went well and if there were
+1:32
+any mistakes. So let's say you look through 20 invoices, you find that invoice 1 is fine, the
+1:37
+output looks correct. For invoice 2, maybe it confused the date of the invoice, that is when
+1:42
+was the invoice issued, with the due date of the invoice, and in this task we want to extract the
+1:47
+due date so we can issue payments on time. So then I might note down in a document or in a
+1:52
+spreadsheet that for invoice 2, the dates were mixed up. Maybe invoice 3 was fine, invoice 4 was
+1:57
+fine, and so on. But as I go through this example, I find that there are quite a lot of examples where I had
+2:03
+mixed up the dates. So it is based on going through a number of examples like this, that in this case
+2:10
+you might conclude that one common error mode is that it is struggling with the dates. In that case,
+2:17
+one thing you might consider would be to of course figure out how to improve your system to make it
+2:23
+extract due dates better, but also maybe write an eval to measure the accuracy with which it is
+2:28
+extracting due dates. In comparison, if you had found that it was extracting the biller address
+2:35
+incorrectly, who knows, maybe you have billers with unusual sounding names and so maybe it
+2:40
+struggles with billers, or especially if you have international billers whose names may not even all
+2:44
+be English letters, then you might instead focus on building an eval for the biller address. So one
+2:50
+of the reasons why building a quick and dirty system and looking at the output is so helpful
+2:55
+is it even helps you decide what do you want to put the most effort into evaluating. Now if you've
+3:02
+decided that you want to modify your system to improve the accuracy with which it is extracting
+3:08
+the due date of the invoice, then to track progress it might be a good idea to create an
+3:14
+evaluation or an eval to measure the accuracy of date extraction. There are probably multiple ways
+3:19
+one might go about this, but let me share with you how I might go about this. To create a test set or
+3:25
+an evaluation set, I might find 10 to 20 invoices and manually write down what is the due date. So
+3:32
+maybe one invoice has a due date of August 20th, 2025, and I write it down as a standard year, month,
+3:38
+date format. And then to make it easy to evaluate in code later, I would probably write the prompt
+3:45
+to the LLM to tell it to always format the due date in this year, month, date format. And with that,
+3:51
+I can then write code to extract out the one date that the LLM has output, which is the due date,
+3:56
+because that's the one day we care about. So this is a regular expression, pattern matching, you know,
+4:00
+four numbers of the year, two for the month, two for the date, and extract that out. And then I can
+4:05
+just write code to test if the extract date is equal to the actual date, that is the ground
+4:11
+truth annotation I had written down. So with an eval set of, say, 20 or so invoices, I build and
+4:17
+make changes to see if the percentage of time that it gets the extracted date correct is hopefully
+4:23
+going up as I tweak my prompts or tweak other parts of my system. So just to summarize what
+4:28
+we've seen so far, we build a system, then look at outputs to discover where it may be behaving in
+4:34
+an unsatisfactory way, such as due dates are wrong. Then to drive improvements to this important
+4:40
+output, put in place a small eval with, say, just 20 examples to help us track progress.
+4:45
+And this lets me go back to two prompts, try different algorithms, and so on to see if I can
+4:49
+move up this metric of due date accuracy. So this is what improving a Gentic AI workflow will often
+4:57
+feel like. Look at the output, see what's wrong, then if you know how to fix it, just fix it. But
+5:00
+if you need a longer process of improving it, then put in place an eval and use that to drive
+5:05
+further development. One other thing to consider is if after working for a while, if you think
+5:10
+those 20 examples you had initially aren't good enough, maybe they don't cover all the cases you
+5:14
+want, or maybe 20 examples is just too few, then you can always add to the eval set over time to
+5:19
+make sure it better reflects your personal judgments on whether or not the system's performance is
+5:24
+sufficiently satisfactory. This is just one example. For the second example, let's look at
+5:29
+building a marketing copy assistant for writing captions for Instagram, where to keep things
+5:35
+succinct, let's say our marketing team tells us that they want captions that are at most 10 words
+5:39
+long. So we would have an image of a product, say a pair of sunglasses that we want to market,
+5:45
+and then have a user query, like please write a caption to sell these sunglasses, and then have a
+5:51
+LLM or large multi-modal model analyze the image and the query and generate a description of the
+5:57
+sunglasses. And there are lots of different ways that a marketing copy assistance may go wrong,
+6:03
+but let's say that you look at the output and you find that the copy or the text generated mostly
+6:07
+sounds okay, but maybe it's just sometimes too long. So for the sunglasses input, generate 17
+6:12
+words. If you have a coffee machine, it's okay. Stylish is okay. Blue shirt, 14 words. Blender,
+6:17
+11 words. So it looks like in this example, the LLM is having a hard time adhering to the length
+6:24
+guideline. So again, there are lots of things that could have gone wrong with a marketing copy
+6:28
+assistant, but if you find that it's struggling with the length of the output, then you might
+6:33
+build an eval to track this so that you can make improvements and make sure it's getting better at
+6:39
+adhering to the length guideline. So to create an eval to measure the text length, what you might do
+6:44
+is create a set of test stars. So mark a pair of sunglasses, a coffee machine, and so on, and maybe
+6:49
+create 10 to 20 examples. Then you would run each of them through your system and write code to
+6:56
+measure the word count of the output. So this is Python code to measure the word count of a piece
+7:02
+of text. Then lastly, you would compare the length of the generated text to the 10 word target limit.
+7:10
+So if word count is equal to 10, now I'm correct, plus equals one. One difference between this and
+7:15
+the previous invoice processing example is that there is no per example ground truth. The target
+7:22
+is just 10, same for every single example. Whereas in contrast, for the invoice processing example,
+7:27
+we had to generate a custom target label that is the correct due date of the invoice, and we're
+7:33
+testing the outputs against that per example ground truth. I know I used a very simple workflow for
+7:39
+generating these captions, but these types of evals can be applied to much more complex
+7:44
+generation workflows as well. Let me touch on one final example in which we'll revisit the research
+7:49
+agents we've been looking at. If you look at the output of the research agents on different input
+7:56
+prompts, let's say that when you ask it to write an article on recent breakthroughs in black hole
+8:01
+science, you find that it missed some high profile result and a loss of news coverage. So this is an
+8:07
+unsatisfactory result. Or if you ask it to research renting versus buying a home in Seattle,
+8:11
+well, it seems to do a good job. Or robotics for harvesting fruits. Well, it didn't mention
+8:16
+a leading equipment company. So based on this evaluation, it looks like sometimes it misses a
+8:22
+really important point that a human expert writer would have captured. So then I would create an
+8:29
+eval to measure how often it captures the most important points. For example, you might come up
+8:35
+with a number of example prompts on black holes, robotic harvesting, and so on. And for each one,
+8:40
+come up with, let's say, three to five gold standard discussion points for each of these
+8:45
+topics. Notice that here we do have a per example annotation because the gold standard talking
+8:51
+points, that is the most important talking points, they are different for each of these examples.
+8:56
+With these ground truth annotations, you might then use an LMS judge to count how many of the
+9:02
+gold standard talking points were mentioned. And so an example prompt might be to say, determine
+9:08
+how many of the five gold standard talking points are present in the provided essay. You have the
+9:12
+optional prompts, the essay text, gold standard points, and so on. And have it return a JSON
+9:17
+object with two Gs that scores how many of the points, zero to five, to the score as well as
+9:22
+an explanation. And this allows you to get a score for each prompt in your evaluation set.
+9:29
+In this example, I'm using LMS judge to count how many of the talking points were mentioned
+9:35
+because there's so many different ways to talk about these talking points. And so a regular
+9:40
+expression or a code for simple pattern matching might not work that well, which is why you might
+9:45
+use a LMS judge and treat this as a slightly more subjective evaluation for whether or not, say,
+9:52
+event horizons were adequately mentioned. So this is your third example of how you might build
+9:57
+evals. In order to think about how to build evals for your application, the evals you build
+10:04
+will often have to reflect whatever you see or you're worried about going wrong in your application.
+10:11
+And it turns out that broadly, there are two axes of evaluation. On the top axis is the way you
+10:18
+evaluate the output. In some cases, you evaluate it by writing code with objective evals. And
+10:27
+sometimes you use an OM as a judge for more subjective evals. On the other axis is whether
+10:34
+you have a per example ground truth or not. So for checking invoice date extraction,
+10:41
+we were writing code to evaluate if we got the actual date. And that had a per example ground
+10:47
+truth because each invoice has a different actual date. But in the example where we checked
+10:53
+marketing copy length, every example had a length limit of 10. And so there was no per example
+11:00
+ground truth for that problem. In contrast, for counting gold standard talking points,
+11:05
+there was a per example ground truth because each article had different important talking points.
+11:11
+But we use an LMS judge to read the essay to see if those topics were adequately mentioned
+11:16
+because there's so many different ways to mention the talking points. And the last of the four
+11:21
+quadrants would be LMS judge with no per example ground truth. And one place where we saw that was
+11:28
+if you are grading charts with a rubric, this is when we're looking at visualizing the coffee
+11:33
+machine sales. And if you ask it to grade a chart according to a rubric, such as whether
+11:38
+it's clear access labels and so on, there is the same rubric for every chart. And that would be
+11:43
+using an LMS judge but without a per example ground truth. So I find this two by two grid
+11:48
+as maybe a useful way to think about the different types of evals you might construct for your
+11:53
+application. And by the way, these are sometimes also called end-to-end evals because one end is
+11:59
+the impedance, which is the user query prompt, and the other end is the final output. And so all of
+12:04
+these are evals for the entire end-to-end systems performance. So just to wrap up this video, I'd
+12:11
+like to share a few final tips for designing end-to-end evals. First, quick and dirty evals
+12:17
+is fine to get started. I feel like I see quite a lot of teams that are almost paralyzed because
+12:23
+they think building evals is this massive multi-week effort and so they take longer than
+12:28
+would be ideal to get started. But I think just as you iterate on an agentic workflow and make it
+12:34
+better over time, you should plan to iterate on your evals as well. So if you put in place 10,
+12:40
+15, 20 examples as your first cut at evals and write some code or try prompting an LMS judge,
+12:46
+just do something to start to get some metrics, then that can complement the human eye at looking
+12:52
+at the output. And then it's a blend of the two that can drive your decision-making. And as the
+12:56
+evals become more sophisticated over time, you can then shift more and more of your trust to the
+13:01
+metric-based evals rather than needing to read over hundreds of outputs every time you tweak
+13:06
+a prompt somewhere. And as you go through this process, you'll likely find ways to keep on
+13:11
+improving your evals as well. So if you had 20 examples to start, you may then run into places
+13:18
+where your evals fail to capture your judgment about what system is better. So maybe you update
+13:26
+the system and you look at it and you feel like this has got to work much better, but your eval
+13:31
+fails to show the new system achieving a higher score. If that's the case, that's often an
+13:36
+opportunity to go maybe collect a larger eval set or change the way you evaluate the output to
+13:41
+make it correspond better to your judgment as to what system is actually working better. And so
+13:47
+your evals will get better over time. And lastly, in terms of using evals to gain inspiration
+13:52
+as to what to work on next, a lot of agented workflows are being used to automate tasks that
+13:57
+say humans can do. And so I find for such applications, I'll look for places where the
+14:02
+performance is worse than that of an expert human. And that often gives me inspiration for where to
+14:08
+focus my efforts or what are the types of examples that I maybe get my agentic workflow
+14:13
+to work better than it is currently. So I hope that after you've built that quick and dirty
+14:18
+system, you think about when it would make sense to start putting in some evals to track the
+14:23
+potentially problematic aspects of the system and that that will then help you drive improvements
+14:28
+to the system. In addition to helping you drive improvements, it turns out that there's a method
+14:34
+of evals that helps you hone in of your entire agentic system. What are the components most worth
+14:41
+focusing your attention on? Because agentic systems often have many pieces. So which piece
+14:48
+is going to be most productive for you to spend time working to improve? Turns out being able to
+14:53
+do this well is a really important skill for driving efficient development of agentic workflows.
+14:59
+In the next video, I'd like to deep dive into this topic. So let's go on to the next video.

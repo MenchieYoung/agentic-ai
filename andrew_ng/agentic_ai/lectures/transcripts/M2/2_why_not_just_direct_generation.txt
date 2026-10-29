@@ -1,0 +1,122 @@
+0:04
+Let's take a look at why we might prefer to use a reflection workflow rather than just
+0:04
+prompting an LLM once and having it directly generate the answer and be done with it.
+0:09
+With direct generation, you just prompt the LLM with an instruction and let it generate an answer.
+0:14
+So you can ask an LLM to write an essay about black holes and have it just generate the text,
+0:19
+or have it write the Python functions to calculate
+0:22
+compound interest and have it just write the code directly.
+0:25
+The prompt examples you see here are also called zero-shot prompting.
+0:31
+Let me explain what zero-shot means. In contrast to zero-shot prompting,
+0:35
+a related approach is to include one or more examples of what you want the output to look like
+0:41
+in your prompt. And this is known as one-shot prompting, if in the prompt you include
+0:45
+one example of a desired input-output pair, or two-shot or few-shot prompting,
+0:50
+depending on how many such examples you include in your prompt.
+0:53
+And so zero-shot prompting refers to if you include zero examples and if you don't include
+0:57
+any examples of the desired outputs that you want. But don't worry if you aren't yet familiar
+1:02
+with these terms. The important thing is that in the examples you see here, you're just prompting
+1:07
+the LLM to directly generate an answer in one go, which I'm also calling zero-shot prompting
+1:13
+because we include zero examples. It turns out that multiple studies have
+1:17
+shown that reflection improves on the performance of direct generation on a variety of tasks.
+1:23
+This diagram is adapted from the research paper by Madaan and others, and this shows a range of
+1:30
+different tasks being implemented with different models and with and without reflection.
+1:35
+The way to read this diagram is to look at these pairs of adjacent light followed by
+1:41
+dark-colored bars, where the light bar shows zero-shot prompting and the dark bar
+1:46
+shows the same model but with reflection. And the colors blue, green, and red show
+1:52
+experiments run with different models, such as GPT-3.5 and GPT-4. And what you see is,
+1:58
+for many different applications, the dark bar that is with reflection is quite a bit higher
+2:04
+than the light bar. But of course, your knowledge may vary depending on your specific application.
+2:10
+Here are some more examples where reflection might be helpful.
+2:14
+If you are generating structured data, such as an HTML table, sometimes it may have incorrect
+2:20
+formatting of the output. So a reflection prompt to validate the HTML code could be helpful.
+2:26
+If it's basic HTML, this may not help that much, since LLMs are pretty good at basic HTML. But
+2:31
+especially if you have more complex structured outputs, like maybe a JSON data structure with
+2:36
+a lot of nesting, then reflection may be more likely to spot bugs. Or if you ask an LLM to
+2:41
+generate a sequence of steps that comprise a set of instructions to do something, such as how to
+2:45
+brew a perfect cup of tea, sometimes the LLM may miss steps and a reflection prompt to ask to check
+2:51
+instructions for coherence and completeness might help spot errors. Or something that I've actually
+2:56
+worked on was using an LLM to generate domain names, but sometimes the names it generates has
+3:01
+an unintended meaning or may be really hard to pronounce. And so I've used reflection prompts
+3:06
+to double check if the domain name has any problematic connotations or problematic meanings,
+3:11
+or if the name is hard to pronounce. And we actually used this at one of my team's AI fund
+3:16
+to help brainstorm domain names for startups that we're working on. I want to show you a couple of
+3:21
+examples of reflection prompts. For brainstorming domain names, you might ask it to review the
+3:26
+domain names you suggested, and then ask it to check if each name is easy to pronounce. Check
+3:30
+if each name might mean something negative in English or other languages, and then output a
+3:35
+short list of only the names that satisfy these criteria. Or to improve an email, you can write a
+3:41
+reflection prompt to tell it to review the email first draft, check the tone, verify all fact states
+3:46
+and promises are accurate. This would make sense in the context of the LLM having been fed a number
+3:51
+of facts and dates and so on in order to write the email drafts. All this would be provided as part
+3:56
+of the LLM context. And then based on any problems it may find, write the next draft of the email.
+4:02
+So some tips for writing reflection prompts. It helps to clearly indicate that you want it to
+4:07
+review or to reflect on the first draft of the output. And if you can specify a clear set of
+4:13
+criteria, such as whether the domain name is easy to pronounce and whether it may have negative
+4:17
+connotations or for email, check the tone and verify the facts. Then that guides the LLM better
+4:22
+in reflecting and critiquing on the criteria that you care the most about. I found that one of the
+4:28
+ways I've learned to write better prompts is to read a lot of other prompts that other people
+4:34
+have written. Sometimes I'll actually download open source software and go and find the prompts
+4:40
+in a piece of software that I think is especially well done to just go and read the prompts that
+4:45
+the authors have written. So that I hope you have a sense of how to write a basic reflection prompt
+4:51
+and that maybe you even try it out in your own work to see if it helps give you better performance.
+4:57
+In the next video, I'd like to share with you a fun example where we'll start to look at
+5:02
+multi-modal inputs and outputs. We'll have an algorithm reflect
+5:06
+on an image being generated or a chart being generated. Let's go take a look.

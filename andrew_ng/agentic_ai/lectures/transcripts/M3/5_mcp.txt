@@ -1,0 +1,96 @@
+0:00
+MCP, the Model Context Protocol, was a standard proposed by Anthropic but now adopted by many
+0:06
+other companies and by many developers as a way to give an LLM access to more context and to
+0:13
+more tools. There are a lot of developers developing around the MCP ecosystem and so
+0:18
+learning about this will give you a lot more access to resources for your applications.
+0:23
+Let's take a look. This is the pain points that MCP attempts to solve. If one developer is writing
+0:30
+an application that wants to integrate with data from Slack and Google Drive and GitHub or access
+0:36
+data from a Postgres database, then they might have to write code to wrap around Slack APIs
+0:42
+to have functions to provide to the application, write code to wrap around Google Drive APIs to
+0:47
+parse the application, and similarly for these other tools or data sources. Then what has been
+0:53
+happening in the developer community is if a different team is building a different application,
+0:58
+then they too will integrate by themselves with Slack and Google Drive and GitHub and so on.
+1:04
+So many developers were all building custom wrappers around these types of data sources.
+1:09
+And so if there are M applications being developed and there are N tools out there,
+1:15
+the total amount of work done by the community was M times N. What MCP did was propose a standard
+1:23
+for applications to get access to tools and data sources so that the total work that needs to be
+1:29
+done by the community is now M plus N rather than M times N. The initial design of MCP focused a lot
+1:37
+on how to give more context to an LLM or how to fetch data. So a lot of the initial tools were
+1:44
+ones that would just fetch data. And if you read the MCP documentation, that refers to these as
+1:51
+resources. But MCP gives access to both data as well as the more general functions that an
+1:57
+application may want to call. And it turns out that there are many MCP clients. These are the
+2:03
+applications that want access to tools or to data as well as service, which are often the software
+2:10
+wrappers that then give access to data in Slack or GitHub or Google Drive or allows you to take
+2:16
+actions at these different types of resources. So today there's a rapidly growing list of MCP
+2:22
+clients that consume the tools or the resources as well as MCP service that provide the tools and
+2:28
+resources. And I hope that you find it useful to build your own MCP clients. Your application
+2:34
+maybe one day will be an MCP client. And if you want to provide resources to other developers,
+2:39
+maybe you can build your own MCP server someday. Let me show you a quick example of using an MCP
+2:45
+client. This is a cloud desktop app, and it has been connected to a GitHub MCP server. So when I
+2:54
+enter this query, summarize the readme.markdown from the GitHub repo at this URL, this is actually
+2:59
+an AI suite repo. Then this application, which is an MCP client, uses the GitHub MCP server with
+3:07
+the request, please get the file readme.markdown from the repo AI suite from this repo. And then it
+3:13
+gets this response, which is pretty long. All this is then fed back to the LMS context and the LMS
+3:20
+then generates the summary of the markdown file. Now let me enter another request, which is let me
+3:27
+enter what are the latest pull requests. This in turn causes the LMS to use the MCP server to make
+3:35
+a different request, to list the pull request. This is another tool provided by GitHub's MCP
+3:42
+server. And so it makes this request with repo AI suite, sort, going to update it, list 20, and so on.
+3:49
+And then it gives this response, which is fed back to the LM and the LM then writes this nice
+3:55
+text summary of the latest pull request for this repo. MCP is an important standard. If you want to
+4:00
+learn more about it, deeplearn.ai also has a short course that goes much deeper into just the MCP
+4:07
+protocol that you can check out after finishing the course if you're interested. I hope this video
+4:12
+gives you a brief overview of why it's useful and also why many developers are now building to this
+4:19
+standard. This brings us to the last video on tool use and I hope that by giving your own access to
+4:26
+tools, you build and build agentic applications that are much more powerful. In the next module, we'll talk
+4:34
+about evaluations and error analysis. It turns out that one thing I've seen that distinguishes people
+4:41
+that can execute agentic workflows really well versus teams that are not as efficient at it is
+4:48
+your ability to drive a disciplined evaluation process. In the next set of videos, which I think
+4:56
+is maybe the most important module of this entire course, I hope to share with you some of the best practices
+5:02
+of how to use evals to drive development of agentic workflows. Look forward to seeing you in the next module.

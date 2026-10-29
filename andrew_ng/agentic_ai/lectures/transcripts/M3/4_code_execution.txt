@@ -1,0 +1,114 @@
+0:05
+In a few agentic applications I've worked on, I gave the OM the option to write code to then
+0:05
+carry out the task I wanted it to. And I've been a few times now, I've been really surprised and
+0:10
+delighted by the cleverness of the code solutions it generated in order to solve various tasks for
+0:16
+me. So if you haven't used code execution much, I think you might be surprised and delighted at
+0:23
+what this will let your OM applications do. Let's take a look. Let's take an example of
+0:29
+building an application that can input math word problems and solve them for you. So you might
+0:35
+create tools that add numbers, subtract numbers, multiply numbers, and divide numbers. And if
+0:40
+someone says, please add 13.2 plus 18.9, then it triggers the add tool and then it gets you the
+0:45
+right answer. But what if someone now types in, what is the square root of two? Well, one thing
+0:50
+you could do is write a new tool for a square root, but then maybe some new thing is needed to
+0:56
+carry out exponentiation. And in fact, if you look at the number of buttons on your modern
+1:01
+scientific calculator, are you going to create a separate tool for every one of these buttons and
+1:06
+the many more things that we would want to do in math calculation? So instead of trying to implement
+1:12
+one tool after another, a different approach is to let it write and execute code. To tell the OM
+1:19
+to write code, you might write a prompt like this. Write code to solve the user's query. Return your
+1:23
+answer as Python code delimited with execute Python and closing execute Python tags. So given a query
+1:31
+like what is the square root of two, the OM might generate outputs like this. You can then use
+1:36
+pattern matching, for example, a regular expression to look for the start and end execute Python tags
+1:43
+and extract the code in between. So here you get these two lines of code shown in the green box,
+1:49
+and you can then execute this code for the OM and get the output, in this case, 1.4142 and so on.
+1:57
+Lastly, this numerical answer is then passed back to the OM and it can write a nicely formatted
+2:03
+answer to the original question. There are a few different ways you can carry out the code
+2:07
+execution step for the OM. One is to use Python's exec function. This is a built-in Python function
+2:14
+which will execute whatever code you pass in. And this is very powerful for your OM to really
+2:20
+write code and get you to execute that code, although there are some security implications
+2:25
+which we'll see later in this video. And then there are also some tools that will let you run the code
+2:31
+in a safer sandbox environment. And of course, square root of two is a relatively simple example.
+2:37
+An OM can also accurately write code to, for example, do interest calculations and solve much harder
+2:45
+math calculations than this. One refinement to this idea, which you sort of saw in our section
+2:51
+on reflection, is that if code execution fails, so if for some reason the OM had generated code
+2:57
+that wasn't quite correct, then passing that error message back to the OM to let it reflect and
+3:03
+maybe revise this code and try another one or two times. That can sometimes also allow it to get a
+3:09
+more accurate answer. Now, running arbitrary code that an OM generates does have a small chance of
+3:16
+causing something bad to happen. Recently, one of my team members was using a highly agentic coder
+3:23
+and it actually chose to remove star.py within a project directory. So this is actually a real
+3:30
+example. And eventually that agentic coder did apologize. It said, yes, that's actually right.
+3:34
+That was an incredibly stupid mistake. I guess I was glad that this agentic coder was really sorry,
+3:40
+but I already deleted a bunch of Python files. Unfortunately, the team member had it backed up
+3:44
+on GitHub repo, so there was no real harm done, but it would have been not great if this arbitrary
+3:50
+code, which made a mistake of deleting a bunch of files, had been executed without a backup.
+3:55
+So the best practice for code execution is to run it inside a sandbox environment.
+4:00
+In practice, the risk for any single line of code is not that high. So if I'm being candid,
+4:06
+many developers will execute code from the OM without too much checking. But if you want to
+4:12
+be a bit safer, then the best practice is to create a sandbox so that if an OM generates bad code,
+4:19
+there's a lower risk of data loss or leakage of sensitive data and so on. So sandbox environments
+4:26
+like Docker or E2B as a lightweight sandbox environment can reduce the risk of arbitrary
+4:33
+code being executed in a way that damages your system or your environment. It turns out that
+4:39
+code execution is so important that a lot of trainers of LLMs actually do special work to
+4:45
+make sure that code execution works well on their applications. But I hope that as you add this as
+4:52
+one more tool for you to potentially offer to LLMs, it will let you make your applications
+4:58
+much more powerful. So far, and what we've discussed, you have to create tools and make them
+5:04
+available one at a time to your LLM. It turns out that many different teams are building similar
+5:10
+tools and having to do all this work of building functions and making them available to the LLMs.
+5:17
+But there is recently a new standard called MCP, Model Context Protocol, that's making it much
+5:24
+easier for developers to get access to a huge set of tools for LLMs to use. This is an important
+5:31
+protocol that more and more teams are using to develop LLM-based applications. Let's go learn
+5:36
+about MCP in the next video.

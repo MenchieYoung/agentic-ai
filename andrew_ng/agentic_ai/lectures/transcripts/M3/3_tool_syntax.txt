@@ -1,0 +1,120 @@
+0:02
+Let's take a look at how to write code to have your LLM get tools called.
+0:04
+Here's our old getCurrentTime function without the time zone argument.
+0:09
+Let me show you how to use the AI Suite open source library in order to have your LLM call
+0:14
+tools. By the way, technically, as you saw from the last video, the LLM doesn't call the tool.
+0:20
+The LLM just requests that you call the tool. But among developers building agentic workflows,
+0:25
+many of us will occasionally just say the LLM calls the tool, even though it's not technically
+0:30
+what happens, but because it's just a shorter way to say it.
+0:34
+This syntax here is very similar to the OpenAI syntax for calling these LLMs, except that here,
+0:41
+I'm using the AI Suite library, which is an open source package that some friends and I had worked
+0:46
+on that makes it easy to call multiple LLM providers. So the code syntax, and if this
+0:53
+looks like a lot to you, don't worry about it. You'll see more of this in the code labs.
+0:57
+But very briefly, this is very similar to the OpenAI syntax, where you say response equals
+1:02
+client check, completions create, then select the model, which in this case, we'll use the
+1:07
+OpenAI model GPT-4o, messages equals messages, assuming you've put into an array here the
+1:13
+messages you want to pass the LLM, and it will say tools equals, then a list of the tools you want
+1:19
+the LLM to have access to. And in this case, there's just one tool, which is get current time,
+1:23
+and then don't worry too much about the max turns parameter. This is included because
+1:28
+after a tool call returns, the LLM might decide to call another tool, and after that tool call
+1:33
+returns, the LLM might decide to call yet another tool. So max turns is just a ceiling on how many
+1:38
+times you want the LLM to request one tool after another before you stop to just break out of a
+1:44
+possible infinite loop. In practice, you almost never hit this limit unless your code is doing
+1:49
+something unusually ambitious. So I wouldn't worry about the max turns parameter. I usually just set it to
+1:54
+five, but in practice, it doesn't matter that much. And it turns out that with AISuite, the function
+2:00
+get current time is automatically described to the LLM in an appropriate way to enable the LLM to
+2:06
+know when to call it. So rather than you needing to manually write a long prompt to tell the LLM,
+2:12
+once get current time, this syntax in AISuite does that automatically. And to make it seem not
+2:18
+too mysterious, the way it does that, it actually looks at the dot string associated with get current
+2:23
+time with this comments in get current time in order to figure out how to describe this function
+2:30
+to the LLM. So to illustrate how this works, here's the function again, and here's the
+2:36
+snippet of code using AISuite to call the LLM. Behind the scenes, what this will do is create a
+2:43
+JSON schema that describes the function in detail. And this over here on the right is what is actually
+2:50
+passed to the LLM. And specifically, it will pull the name of the function, which is get current time,
+2:55
+and then also a description of the function, which is pulled out from the doc string to tell the LLM
+3:01
+what this function does, which lets it decide when to call it. There's some APIs which require that
+3:06
+you manually construct this JSON schema and then pass this JSON schema to the LLM, but the AISuite
+3:13
+package does this automatically for you. To go through a slightly more complex example, if you
+3:18
+have this more complex get current time tool that also has an input time zone parameter, then AISuite
+3:25
+will create this more complex JSON schema where, as before, it pulls out the name of the function,
+3:30
+which is get current time, pulls out the description from the doc string, and then also identifies
+3:35
+what are the parameters and describes them to the LLM based on the documentation here shown on the
+3:41
+left, so that when it's generating the function arguments to call the tool, it knows that it
+3:47
+should be something like America/New York or Pacific/Auckland or some other time zone.
+3:53
+And so if you execute this code snippet here on the lower left, it will use the OpenAI
+3:59
+GPT-4o model, see if the LLM wants the function called, and if so, it'll call the function,
+4:04
+get the output from the function, feed that back to the LLM, and do that up to a maximum of five
+4:10
+turns and then return the response. Note that if the LLM requests to call the get current time
+4:17
+function, AISuite or this client, it will call the get current time for you, so you don't need
+4:23
+to explicitly do it yourself. All that is done in this single function call that you have to write.
+4:29
+Just note that there are some other implementations of LLM interfaces where you have to do that step
+4:36
+manually, but with this particular package, this is all wrapped into this client chat completions
+4:41
+create function call. So you now know how to get an LLM to call functions, and I hope that you enjoy
+4:49
+playing with this in the labs, and it's actually really amazing when you provide a few functions
+4:54
+to LLM and LLM decides to go and take action in the world, go and get more information
+4:59
+to fulfill your requests. If you haven't played with this before, I think you'll find this to be
+5:04
+really cool. It turns out that of all the tools you can give an LLM, there's one that's a bit special,
+5:10
+which is a code execution tool. It turns out to be really powerful. If you can tell an LLM,
+5:16
+you can write code, and I will have a tool to execute that code for you, because code can do
+5:21
+a lot of things, and we give an LLM the flexibility to write code and have code executed. That turns
+5:28
+out to be an incredibly powerful tool to give to LLMs. So code execution is special. Let's go
+5:35
+on to the next video to talk about the code execution tool for LLMs.

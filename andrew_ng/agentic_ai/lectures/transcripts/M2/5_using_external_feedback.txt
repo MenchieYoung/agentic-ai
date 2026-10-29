@@ -1,0 +1,104 @@
+0:02
+Reflection with external feedback, if you can get it, is much more powerful than reflection
+0:04
+using the LM as the only source of feedback. Let's take a look.
+0:09
+When I'm building an application, and if I'm just prompt engineering for direct generation
+0:13
+of a zero-shot prompting, this is what performance might look like over time,
+0:17
+where initially, as I tune the prompt, the performance improves for a while,
+0:21
+but then after a while, it sort of plateaus or flattens out, and despite further engineering
+0:27
+the prompt, it's just hard to get that much better level of performance.
+0:30
+So instead of wasting all this time on tuning the prompt, sometimes it'd be better if only
+0:35
+earlier on in the process, I had started adding reflection, and sometimes that gives a bump in
+0:40
+performance. Sometimes it's smaller, sometimes it's a bigger bump, but that adds complexity.
+0:45
+But if I had started adding in reflection, maybe at this point in the process,
+0:49
+and then started tuning the reflection prompt, then maybe I end up with a performance that
+0:53
+looks like this. But it turns out that if I'm able to get external feedback,
+0:58
+so that the only source of new information isn't just an LM reflecting on the same information as
+1:03
+it had before, but some new external information, then sometimes as I continue to tune the prompts
+1:09
+and tune the external feedback, you end up with an even much higher level of performance.
+1:14
+So it's something to consider if you are working on prompt engineering,
+1:18
+and you feel that your efforts are seeing diminishing returns, that you're tuning a lot
+1:24
+of prompts, but it's just not getting that much better. Then maybe consider if there's reflection,
+1:28
+or even better, if there's some external feedback you can interject to bump the performance curve
+1:33
+off this fattening out red line to maybe some higher trajectory of performance improvement.
+1:39
+Just as a reminder, we saw earlier one source of feedback for if you're writing code would be
+1:44
+if you were to just execute the code and see what output it generates, output or error messages,
+1:50
+and feed that output back to the LM to let it have that new information to reflect,
+1:55
+and then use that information to write a new version of the code. Here are a few more examples
+2:01
+of when software codes or tools can create new information to help the reflection process.
+2:07
+If you're using LM to write emails, and it sometimes mentions competitors' names,
+2:12
+then if you write codes or build a software tool to just carry out pattern matching, maybe via
+2:17
+regular expression pattern matching to search for competitors' names in the output, then whenever
+2:22
+you find a competitor's name, you just feed that back to the LM as a criticism or as input. That's
+2:28
+very useful information to tell it to just rewrite the text without mentioning those competitors.
+2:34
+Or as another example, you might use web search or look at other trusted sources in order to fact
+2:41
+check an essay. So if you're a research agent that says the Taj Mahal was built in 1648, technically
+2:48
+the Taj Mahal was actually commissioned in 1631, and it was finished in 1648. So maybe this isn't
+2:55
+exactly incorrect, but it doesn't capture the accurate history either. In order to more accurately
+3:02
+represent when this beautiful building was built, if you do a web search to color the snippet
+3:08
+explaining exactly the period that the Taj Mahal was built and give that as additional input to your
+3:14
+reflection agent, then it may be able to use that to write a better version of the text on the history
+3:19
+of the Taj Mahal. One last example, if you're using an LM to write copy, maybe for a blog post or for
+3:25
+research paper abstract, but what it writes is sometimes over the word limit. LMs are still not
+3:31
+very good at following exact word limits. Then if you implement a word count tool, just write code to
+3:37
+count the exact number of words, and if it exceeds the word limit, then feed that word count back to
+3:43
+the LM and ask it to try again. Then this helps it to more accurately hit the desired length of
+3:50
+the output you wanted to generate. So in each of these three examples, you can write a piece of
+3:56
+code to help find additional facts about the initial output to then give those facts, be it that
+4:03
+you found the competitor's name or information web search or the exact word count, to feed into the
+4:09
+reflection LM in order to help it do a better job thinking about how to improve the output.
+4:16
+Reflections are powerful too, and I hope you find it useful in a lot of your own work. In the next
+4:23
+module, we'll build on this to talk about tool use, where in addition to the handful of tool examples
+4:29
+you saw, you learn how to systematically get your own to call different functions, and this will make
+4:34
+your agenting applications much more powerful. I hope you enjoyed learning about reflection.
+4:41
+I'm going to now reflect on what you just learned. I hope to see you in the next video.

@@ -1,0 +1,124 @@
+0:01
+Agents can be autonomous to different degrees. A few years ago, I noticed within the AI community
+0:05
+that there was a growing controversial debate about what is an agent, and some people are
+0:10
+writing a paper saying I built an agent, and others would say, no, that's not really a true
+0:14
+agent. And I felt this debate was unnecessary, which is why I started using the term agentic,
+0:20
+because I thought if we use it as an adjective rather than a binary, it's either an agent or not,
+0:26
+then we're going to have to acknowledge that systems can be agentic to different degrees.
+0:31
+And let's just call it all agentic and move on with the real work of building these systems
+0:35
+rather than debating, you know, is this sufficiently autonomous to be an agent or not?
+0:40
+I remember when I prepared a talk on agentic reasoning, one of my team members actually
+0:45
+came to me and said, hey, Andrew, we don't need yet another word. You know, we have agent,
+0:49
+why are you making up another word, agentic? But I decided to use it anyway. And then later on,
+0:54
+wrote an article in a given newsletter, The Batch, and then also posted on social media,
+1:00
+saying that instead of arguing over which word to include or exclude as being a true agent,
+1:05
+let's acknowledge that different degrees to which systems can be agentic. And I think this helped
+1:11
+move past the debate on what is a true agent and let us just focus on actually building them.
+1:17
+Some agents can be less autonomous. So take the example of writing an essay about black holes.
+1:24
+You can have a relatively simple agent to come up with a few web search terms or web search queries.
+1:31
+Then you can hard code in that you call a web search engine, fetch some web pages,
+1:36
+and then use that to write an essay. And this is an example of a less autonomous agent
+1:41
+with a fully deterministic sequence of steps. And this will work okay.
+1:46
+In terms of notational convention, throughout this course, I'll use the red color,
+1:50
+as you see here on the left, to denote the user input, such as a user query in this case,
+1:55
+or in later examples, maybe the input document into an agentic workflow.
+1:59
+The gray boxes denote calls to an LLM, and the green boxes, like the web search and the web
+2:07
+fetch boxes that you see here, indicate steps where other software is being used to carry out
+2:12
+an action, such as a web search API call or executing code to fetch the contents of a website.
+2:17
+Then an agent can be more autonomous, where, given a request to write an essay about black holes,
+2:23
+perhaps you let the LLM decide, does it want to do a web search, or does it want to search
+2:28
+recent news sources, or does it want to search for recent research papers on the website archive?
+2:33
+Based on that, maybe in this example, the LLM, not the human engineer, but the LLM chooses,
+2:39
+in this case, to call a web search engine, and then after that, you may let the LLM decide
+2:44
+how many web pages does it want to fetch, or if it fetches the PDF, does it need to
+2:49
+call a function, or also call a tool, to convert the PDF to text?
+2:53
+And in this case, maybe it fetches its top few web pages, then it can write an essay,
+2:59
+decide whether to reflect and improve, and maybe even go back to fetch more web pages,
+3:03
+and then to finally produce an output.
+3:05
+And so even for this example of a research agent, we can see that some agents can be
+3:12
+less autonomous, with a linear sequence of steps to be executed, determined by a programmer,
+3:17
+and some can be more autonomous, where you trust the LLM to make more decisions,
+3:21
+and the exact sequence of steps that happens may be even determined by the LLM, rather than
+3:26
+in advance by the programmer.
+3:28
+So for less autonomous systems, you will usually have all the steps predetermined in advance,
+3:33
+and any functions it calls, like web search, and we'll call that tool use, as you learn
+3:38
+in the third module in this course, might be hard-coded by the human engineer, by you
+3:42
+or me, and most of the autonomy is in what text the LLM generates.
+3:46
+At the end of the spectrum would be highly autonomous agents, where the agent makes many
+3:51
+decisions autonomously, including, for example, deciding what is the sequence of steps it
+3:55
+will carry out in order to write the essay.
+3:58
+And there's some highly autonomous agents that can even write new functions, or sometimes
+4:03
+create new tools that it can then execute.
+4:06
+And somewhere in between are semi-autonomous agents, where it can make some decisions,
+4:10
+choose tools, but the tools are usually more predefined.
+4:13
+As you look at different examples in this course, you learn how to build applications
+4:17
+anywhere on this spectrum of less to more highly autonomous, and you find that there
+4:22
+are tons of applications in the less autonomous end of the spectrum that are very valuable
+4:26
+being built for tons of businesses today, and at the same time, there are also applications
+4:31
+being worked on at the more highly autonomous end of the spectrum, but those are usually
+4:35
+less easily controllable, a little bit more unpredictable, and also a lot of active research
+4:41
+as well to figure out how to build these more highly autonomous agents.
+4:46
+And with that, let's go on to the next video to dive deeper into this and to hear about
+4:52
+some of the benefits of using agents and why they allow us to do things that just were
+4:57
+not possible with earlier generations of base applications.

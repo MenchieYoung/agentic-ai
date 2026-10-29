@@ -1,0 +1,42 @@
+0:02
+Welcome to this course on agentic AI. When I coined the term agentic to describe what I saw
+0:04
+as an important and rapidly growing trend in how people were building on-base applications,
+0:10
+what I did not realize was that a bunch of marketers would get hold of this term
+0:14
+and use it as a sticker and put this on almost everything in sight. And that has caused hype
+0:19
+on agentic AI to skyrocket. The good news though is that ignoring the hype, the number of truly
+0:26
+valuable and useful applications built using agentic AI has also grown very rapidly, even if
+0:32
+not quite as rapidly as the hype. And in this course, what I'd like to do is show you best
+0:37
+practices for building agentic AI applications. And this will open up a lot of new opportunities
+0:44
+to you in terms of what you can now build. Today, agentic workflows are being used to build
+0:48
+applications like customer support agents, or to do deep research to help write deeply insightful
+0:55
+research reports, or to process tricky legal documents, or to look at patient input and render
+1:01
+or to suggest possible medical diagnoses. On many of my teams, a lot of the projects we built just
+1:07
+would be impossible without agentic workflows. And so knowing how to build applications with them
+1:13
+is one of the most important and valuable skills in AI today. It turns out that one of the biggest
+1:19
+differences I've seen between people that really know how to build agentic workflows compared to
+1:24
+people that are less effective at it is the ability to drive a disciplined development process,
+1:29
+specifically one focused on evals and error analysis. And in this course, I'll tell you what
+1:34
+that means and show you what allows you to be really good at building these agentic workflows.
+1:40
+Being able to do this is one of the most important skills in AI today and will open up a lot more
+1:45
+opportunities, be it job opportunities or opportunities to just build amazing software
+1:50
+yourself. With that, let's go on to the next video to dive more into what are agentic workflows.

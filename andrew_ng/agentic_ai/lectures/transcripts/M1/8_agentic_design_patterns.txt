@@ -1,0 +1,148 @@
+0:04
+We build agentic workflows by taking building blocks and putting them together to sequence
+0:04
+out these complex workflows. In this video, I'd like to share with you a few of the key design
+0:10
+patterns, which are patterns for how you can think about combining these building blocks into more
+0:16
+complex workflows. Let's take a look. I think four key design patterns for building agentic
+0:21
+workflows are reflection, two-use, planning, and multi-agent collaboration. Let me briefly go over
+0:27
+what they mean, and then we'll actually go through most of these in-depth latent discourse as well.
+0:33
+The first of the major design patterns is reflection. So I might go to an LLM agent and
+0:39
+ask it to write code, and it turns out that an LLM might then generate code like this. It defines
+0:45
+here a Python function to do a certain task. I could then construct a prompt that looks like this.
+0:50
+I can say, here's code intended for a certain task, and then copy-paste whatever the LLM had
+0:55
+just output back into this prompt. And then I ask it to check the code carefully for correctness,
+0:59
+style, and efficiency, and give constructive criticism. And it turns out that the same LLM model
+1:03
+prompted this way may be able to point out some problems with the code. And if I then take this
+1:09
+critique and feed it back to the model to say, looks like this is a bug, could you change the
+1:15
+code to fix it? Then it may actually come with a better version of the code. To give a preview of
+1:21
+tool use, if you're able to run the code and see where the code fails, then feeding that back to
+1:28
+the LLM can also cause it to be able to iterate and generate a much better, say, v3 version 3 of the
+1:35
+code. So reflection is a common design pattern where you can ask the LLM to examine its own outputs
+1:41
+or maybe bring in some external sources of information, such as run the code and see if it
+1:46
+generates any error messages, and use that as feedback to iterate again and come up with a better
+1:52
+version of its output. And this design pattern isn't magic. It does not result in everything
+1:58
+working 100% of the time. But sometimes it can be a nice bump in the performance of your system.
+2:03
+Now, I've drawn this as if it was a single LLM that I'm prompting, but to foreshadow multi-agent
+2:09
+workflows, you can also imagine instead of having the same model critique itself, you can imagine
+2:15
+having a critique agent. And all that is, is an LLM that's been prompted with instructions like,
+2:20
+your role is to critique code, here's code intended for a task, check the code carefully, and so on.
+2:25
+And the second critique agent, maybe point out errors or run unit tests. And by having two
+2:31
+simulated agents where each agent is just an LLM prompted to take on a certain persona,
+2:36
+you can have them go back and forth to iterate to get a better output. In addition to reflection
+2:42
+pattern, the second important design pattern is tool use. Where today, LLMs can be given tools,
+2:49
+meaning functions that they can call in order to get work done. For example, if you ask an LLM,
+2:54
+what's the best coffee maker according to reviewers, and you give it a web search tool,
+2:58
+then it can actually search the internet to find much better answers. Or a code execution tool.
+3:03
+If you ask a math question like, if I invest $100 in compound interest, what do I have at the end?
+3:08
+It can then write code and execute code to compute an answer. Today, different developers
+3:13
+have given LLMs many different tools for everything from math or data analysis to gather information
+3:19
+by fetching things from the web or for various databases, to interface with productivity apps
+3:24
+like email, calendar, and so on, as well as to process images and much more. And the ability
+3:30
+of an LLM to decide what tools to use, meaning what functions to call, that lets the model get a lot
+3:37
+more done. The third of the four design patterns is planning. This is an example from a paper
+3:43
+called Hugging GPT, in which if you ask a system to please generate an image where a girl is reading
+3:51
+a book and a pose is the same as a boy in the image, then please describe the new image in
+3:54
+your voice. Then a model can automatically decide that to carry out this task, it first needs to
+4:00
+find a pose determination model to figure out the pose of the boy. Then to pose the image,
+4:05
+to generate a picture of a girl and image the text, and then finally text the speech. And so
+4:10
+in planning, an LLM decides what is the sequence of actions it needs to take. In this case, it is
+4:17
+a sequence of API calls so that it can then carry out the right sequence of steps in the right order
+4:23
+in order to carry out the task. So rather than the developer hard coding the sequence of steps
+4:29
+in advance, this actually lets the LLM decide what are the steps to take. Agents that plan today are
+4:36
+harder to control and somewhat more experimental, but sometimes they can give really delightful
+4:40
+results. And then finally, multi-agent workflows. Just as a human manager might hire a number of
+4:47
+others to work together on a complex project, in some cases it might make sense for you to hire
+4:52
+a set of multiple agents, maybe each of which specializes in a different role, and have them
+4:58
+work together to accomplish a complex task. The picture you see here on the left is taken from a
+5:03
+project called ChatDev, which is a software framework created by Chen Qian and collaborators.
+5:09
+In ChatDev, multiple agents with different roles, like chief executive officer, programmer, tester,
+5:15
+designer, and so on, collaborate together as if they were a virtual software company and can
+5:22
+collaboratively complete a range of software development tasks. Let's consider another example.
+5:28
+If you want to write a marketing brochure, maybe you think of hiring a team of three people, such
+5:33
+as a researcher to do online research, a marketer to write the marketing text, and then finally an
+5:39
+editor to edit and polish the text. And so in a similar way, you might consider building a multi-agent
+5:47
+workflow in which you have a simulated research agent, a simulated marketer agent, and a simulated
+5:53
+editor agent that then come together to carry out this task for you. Multi-agent workflows are
+6:00
+more difficult to control since you don't always know ahead of time what the agents will do, but
+6:05
+research has shown that they can result in better outcomes for many complex tasks, including things
+6:11
+like writing biographies or deciding on chess moves to make in the game. You learn more about
+6:16
+multi-agent workflows later in this course as well. And so with that, I hope you have a sense of what
+6:21
+agentic workflows can do, as well as of what are the key challenges of finding building blocks and
+6:27
+putting them together, maybe via these design patterns, in order to implement an agentic workflow.
+6:33
+And of course, also developing eval so you can see how well your system is doing and keep on improving
+6:39
+on it. In the next module, I'd like to share with you a deep dive into the first of these design
+6:46
+patterns, that is reflection, and you find that it's a maybe surprisingly simple to implement
+6:53
+technique that can give the performance of your system sometimes a very nice bump. So let's go on
+6:59
+to the next module to learn about the reflection design pattern.

@@ -1,0 +1,106 @@
+0:02
+So what is agentic AI and why are agentic AI workflows so powerful? Let's take a look.
+0:05
+The way that many of us use large language models or LMs today is by prompting it to say,
+0:10
+write an essay for us on a certain topic X. And I think of that as akin to going to a human,
+0:16
+or in this case, going to an AI and asking it to please type out an essay for me by writing
+0:22
+from the first word to the last word all in one go and without ever using backspace.
+0:27
+It turns out that we as people, we don't do our best writing like that by being forced to write
+0:31
+in this completely linear order and nor do AI models. But despite the difficulty of being
+0:37
+constrained to write in this way, our LMs do surprisingly well. In contrast, with an agentic
+0:42
+workflow, this is what the process might look like. You may ask it to first write an essay
+0:47
+outline on a certain topic, then ask if it needs to do any web research. And after doing some web
+0:52
+research and maybe downloading some web pages, then to write the first draft and then to read
+0:56
+the first draft and see what parts need revision or more research and then revise the draft and so
+1:01
+on. And this type of workflow is more akin to doing some thinking and some research and then
+1:06
+doing some revision and then doing some more thinking and so on. And with this iterative
+1:11
+process, it turns out that an agentic workflow can take longer, but it delivers a much better
+1:18
+work product. So an agentic AI workflow is a process where an L1 based app executes multiple
+1:24
+steps to complete a task. In this example, you might use an LM to write the first essay outline
+1:31
+and then you might use an LM to decide what search terms to type into a web search engine
+1:37
+or really what search terms to call a web search API with in order to get back relevant web pages.
+1:44
+Based on that, you can feed the downloaded web pages into an LM to have it write the first draft
+1:50
+and then maybe use another LM to reflect and decide what needs more revision. And then depending
+1:57
+on how you design this workflow, perhaps you may even add a human in the loop step where the LM
+2:03
+has the option to request human review, maybe of some key facts. And based on that, it may then
+2:09
+revise the draft and this process results in a much better work output. One of the key skills
+2:16
+you learn in this course is how to take a complex task like writing an essay and breaking it down
+2:23
+into smaller steps for agentic workflows to execute one step at a time to then get the work output
+2:30
+that you want. And knowing how to decompose the task into steps and how to build the components
+2:35
+to execute the individual steps well turns out to be a tricky but important skill that will
+2:41
+determine your ability to build agentic workflows for a huge range of exciting applications. In this
+2:48
+course, a running example that we'll use and something that you build alongside me is a research
+2:54
+agent. So here's an example of what it will look like. You can enter a research topic like how do I
+2:59
+build a new rocket company to compete with SpaceX. I don't personally want to compete with SpaceX
+3:08
+but if you want to, you can try asking a research agent to help your background research.
+3:13
+So this agent starts with planning out what research to use including calling a web search
+3:19
+engine to download some web pages and then to synthesize and rank findings, draft an outline,
+3:25
+have an editor-to-agent review for coherence, and then finally generate a comprehensive markdown
+3:30
+report which it has done here, building a new rocket company to compete with SpaceX with an intro,
+3:35
+background, findings, and so on. I think it points out appropriately that this is going to be a tough
+3:42
+startup to build. So I'm not personally planning to do this but if you want to tackle something
+3:49
+like this, maybe a research agent like this could help you with some initial research. And by finding
+3:56
+and downloading multiple sources and deeply thinking about it, this actually ends up with a
+4:01
+much more thoughtful report than just prompting Noam to write an essay for you would. One of the
+4:08
+reasons I'm excited about this is because in my work I've ended up building quite a few specialized
+4:13
+research agents be it in legal documents for conflict legal compliance or for some healthcare
+4:19
+sectors or some business product research areas. And so I hope that working through this example
+4:25
+you not only learn how to build agentic workflows for many other applications but that some of the
+4:30
+ideas in building research agents will be directly useful to you if you ever need to build a custom
+4:36
+research agent yourself. Now one of the often discussed areas of AI agents is how autonomous
+4:45
+are they? What you just saw here was a relatively complex highly autonomous agentic AI workflow
+4:51
+but there are also other simple workflows that are incredibly valuable. Let's go on to the next
+4:57
+video to talk about the degree to which agentic workflows can be autonomous and does it give you
+5:03
+a framework to think about how you might go about building different applications
+5:07
+and how easy or difficult they might be. See you in the next video.

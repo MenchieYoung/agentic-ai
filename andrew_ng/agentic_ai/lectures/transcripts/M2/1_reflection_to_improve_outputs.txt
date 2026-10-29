@@ -1,0 +1,60 @@
+0:03
+The reflection design pattern is something I've used in many applications, and it's surprisingly easy to implement.
+0:06
+Let's take a look.
+0:07
+Just as humans will sometimes reflect their own output and find a way to improve it, so can OMs.
+0:14
+For example, I might write an email like this, and if I'm typing quickly, I might end up with a first draft that's not great.
+0:21
+And if I read over it, I might say, huh, next month isn't that clear for what dates Tommy might be free for dinner.
+0:28
+And there's such a typo that I had, and also forgot to sign my name.
+0:32
+And this would let me revise the draft to be more specific in saying, hey, Tommy, are you free for dinner on the 5th to the 7th?
+0:39
+A similar process lets OMs also improve their outputs.
+0:43
+You can prompt an OM to write the first draft in email, and given email version 1, email v1,
+0:49
+you can pass it to maybe the same model, the same large language model, but with a different prompt,
+0:55
+and tell it to reflect and write an improved second draft to then get you the final output, email v2.
+1:01
+Here, I have just hard-coded this workflow of prompting the OMs once and then prompting them again to reflect and improve, and that gives email v2.
+1:11
+It turns out that a similar process can be used to improve other types of outputs.
+1:17
+For example, if you are having an OM write code, you might prompt an OM to write code to do a certain task,
+1:23
+and it may give you v1 of the code, and then pass it to the same OM or maybe a different OM to ask it to check the bugs and write an improved second draft of the code.
+1:35
+Different OMs have different strengths, and so sometimes I would choose different models for writing the first draft and for reflecting and trying to improve it.
+1:45
+For example, it turns out reasoning models, sometimes also called thinking models, are pretty good at finding bugs,
+1:52
+and so I'll sometimes write the first draft of the code by direct generation, but then use a reasoning model to check for bugs.
+1:59
+Now, rather than just having an OM reflect on the code, it turns out that if you can get external feedback, meaning new information from outside the OM, reflection becomes much more powerful.
+2:13
+In the case of code, one thing you can do is just execute the code to see what the code does,
+2:19
+and by examining the output, including any error messages of the code, this is incredibly useful information for the OM to reflect and to find a way to improve his code.
+2:29
+So in this example, the OM generated the first draft of the code, but when I run it, it generates a syntax error.
+2:35
+When you pass this code output and error logs back into the OM and ask it to reflect on the feedback and write a new draft, this gives it a lot of very useful information to come up with a much better version 2 of the code.
+2:49
+So the reflection design pattern isn't magic. It does not make an OM always get everything right 100% of the time, but it can often give it maybe a modest bump in performance.
+3:00
+But one design consideration to keep in mind is reflection is much more powerful when there is new additional external information that you can ingest into the reflection process.
+3:11
+So in this example, if you can run the code and have that code output or error messages as an additional input to the reflection step,
+3:19
+that really lets the OM reflect much more deeply and figure out what may be going wrong, if anything, and results in a much better second version of the code than if there wasn't this external information that you can ingest.
+3:31
+So one thing to keep in mind, whenever reflection has an opportunity to get additional information, that makes it much more powerful.
+3:40
+Now with that, let's go on to the next video where I want to share with you a more systematic comparison of using reflection versus direct generation or something we sometimes call zero-shot prompting.
+3:53
+Let's go on to the next video.

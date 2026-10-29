@@ -1,0 +1,256 @@
+0:00
+We've talked a lot about how to build a single agent to complete tasks for you.
+0:04
+In a multi-agent or multi-agentic workflow, we instead have a collection of multiple agents
+0:09
+collaborate to do things for you.
+0:11
+When some people hear for the first time about multi-agent systems, they wonder, why do I
+0:16
+need multiple agents?
+0:17
+It's just the same LLM that I'm prompting over and over, or just one computer.
+0:22
+Why do I need multiple agents?
+0:24
+I find that one useful analogy is, even though I may do things on a single computer, we do
+0:30
+decompose work in a single computer into maybe multiple processes or multiple threads.
+0:36
+And as a developer, thinking, even though it's one CPU on a computer, say, thinking
+0:42
+about how to take work and decompose it into multiple processes and multi-computer programs
+0:47
+to run, that makes it easier for me as a developer to write code.
+0:52
+And in a similar way too, if you have a complex task to carry out, sometimes, instead of thinking
+0:58
+about how to hire one person to do it for you, you might think about hiring a team of
+1:03
+a few people to do different pieces of the task for you.
+1:07
+And so in practice, I found that for many developers of agentic systems, having this
+1:12
+mental framework of not asking, what's the one person I might hire to do something, but
+1:17
+instead, would it make sense to hire people with three or four different roles to do this
+1:21
+overall task for me, that helps give another way to take a complex thing and decompose
+1:27
+it into subtasks and to build for those individual subtasks one at a time.
+1:32
+Let's take a look at some examples of how this works.
+1:35
+Take the task of creating marketing assets.
+1:37
+Say you want to market sunglasses.
+1:40
+Can you come up with a marketing brochure for that?
+1:42
+You might need a researcher on your team to look at trends on sunglasses and what competitors
+1:47
+are offering.
+1:48
+You might also have a graphic designer on your team to render charts or nice looking
+1:53
+graphics of your sunglasses, and then also a writer to take the research, take the graphic
+1:58
+assets and put it all together into a nice looking brochure, or to write a research article.
+2:03
+You might want a researcher to do online research, a statistician to calculate statistics, a
+2:08
+lead writer and an editor to come up with a polished report, or to prepare a legal case.
+2:13
+Real law firms will often have associates, paralegals, maybe an investigator, and we
+2:18
+naturally, because of the way human teams do work, can think of different ways that
+2:24
+complex tasks can be broken down into different individuals with different roles.
+2:30
+So these are examples of when a complex task were already naturally decomposed into subtasks
+2:37
+that different people with different skills can carry out.
+2:40
+Take the example of creating marketing assets.
+2:43
+Look into detail into what a researcher, graphic designer, and writer might do.
+2:48
+A researcher might have the task of analyzing market trends and researching competitors.
+2:54
+And when designing the research agents, one question to keep in mind is what are the tools
+3:01
+that the researcher may need in order to come up with a research report on market trends
+3:05
+and what competitors are doing.
+3:07
+So one natural tool that an agentic researcher might need to use would be web search.
+3:13
+Just as a human researcher asked to do these tasks might need to search online in order
+3:17
+to come up with their report.
+3:19
+Or for a graphic designer agent, they might be tasked with creating visualizations and
+3:25
+artwork.
+3:25
+And so what are the tools that an agentic software graphic designer might need?
+3:31
+Well, they may need image generation and manipulation APIs, or maybe, similar to what you
+3:37
+saw with the coffee machine example, maybe it needs code execution to generate charts.
+3:43
+And then lastly, the writer has transformed the research into report text and marketing
+3:47
+copy.
+3:48
+And in this case, they don't need any tools other than what an LLM can already do to generate
+3:53
+text.
+3:54
+In this and the next video, I'm going to use these purple boxes to denote an agent.
+4:00
+And the way you build individual agents is by prompting an LLM to play the role of a
+4:05
+researcher or a graphic designer or a writer, depending on which agent it is part of.
+4:10
+So, for example, for the researcher agents, you might prompt it to say, you are a research
+4:15
+agent, expert at analyzing market trends and competitors, carry out online research to
+4:21
+analyze market trends for the sunglasses product and give a summary as well of what competitors
+4:25
+are doing.
+4:26
+So that would allow you to build a researcher agent.
+4:29
+And similarly, by prompting an LLM to act as a graphic designer with the appropriate
+4:34
+tools and to act as a writer, that's how you can build a graphic designer as well
+4:40
+as a writer agent.
+4:42
+Having built these three agents, one way to have them work together to generate your final
+4:48
+report would be to use a simple linear audit workflow or a linear plan in this case.
+4:55
+So if you want to create a summer marketing campaign for sunglasses, you might give that
+5:00
+prompt to the research agents.
+5:01
+The research agent then writes a report that says, here are the current sunglasses trends
+5:06
+and competitive offerings.
+5:07
+This research report can then be fed to the graphic designer that looks at the data the
+5:12
+research has found and creates a few data visualizations and artwork options.
+5:16
+All these assets can then be passed to the writer that then takes the research and the
+5:22
+graphic output and writes the final marketing brochure.
+5:26
+The advantage of building a multi-agent workflow in this case is when designing a researcher
+5:32
+or graphic designer or writer, you can focus on one thing at a time.
+5:36
+So I can spend some time building maybe the best graphic designer agents I can, while
+5:40
+maybe my collaborators are building research agents and writer agents.
+5:44
+And in the end, we string it all together to come up with this multi-agent system.
+5:49
+And in some cases, I'm seeing developers start to reuse some agents as well.
+5:55
+So having built a graphic designer for marketing brochures, maybe I'll think about if I can
+6:00
+build a more general graphic designer that can help me write marketing brochures as well
+6:04
+as social media posts, as well as help me illustrate online webpages.
+6:09
+So by coming up with what are the agents you might hire to do a task, and this will sometimes
+6:16
+correspond to who are the types of human employees you might hire to do a task.
+6:21
+You can come up with a workflow like this with maybe even building agents that you could
+6:27
+choose to reuse in other applications as well.
+6:29
+Now, what you see here is a linear plan where one agent, the researcher does this work,
+6:35
+then the graphic designer, and then the writer.
+6:37
+With agents, you can also, as an alternative to a linear plan, you can also have agents
+6:43
+interact with each other in more complex ways.
+6:46
+Let me illustrate with an example of planning using multiple agents.
+6:50
+So previously, you saw how we may give an OM a set of tools that we can call to carry
+6:56
+out different tasks.
+6:57
+In what I want to show you, we will instead give an OM the option to call on different
+7:02
+agents to ask the different agents to help complete different tasks.
+7:06
+So in detail, you might write a prompt like you're a marketing manager, have the following
+7:10
+team of agents to work with, and then give a description of the agents.
+7:13
+And this is very much similar to what we're doing with planning using tools, except the
+7:18
+tools, the green boxes, are replaced with agents, these purple boxes that the OM can
+7:23
+call on.
+7:24
+And then we'll ask it to return a step-by-step plan to carry out the user's request.
+7:27
+And in this case, the OM may ask the researcher to research current sunglasses trends and
+7:32
+then report back.
+7:33
+Then it'll ask the graphic designer to create the images and then report back, then ask
+7:37
+the writer to create a report, and then maybe the OM will choose to review or reflect on
+7:41
+and improve the report one final time.
+7:44
+In executing this plan, you would then take the Step 1 text of the researcher, carry out
+7:50
+research, then pass that to the graphic designer, pass it to the writer, and then maybe do one
+7:55
+final reflection step.
+7:57
+And then you'd be done.
+7:58
+One interesting view of this workflow is as if you have these three agents up here, but
+8:04
+this OM on the left is actually like a fourth agent.
+8:08
+There's a marketing manager that is a manager of a marketing team that is setting direction
+8:13
+and then delegating tasks to the researcher, the graphic designer, and the writer agents.
+8:17
+So this becomes actually a collection of four agents for a marketing manager agent
+8:21
+coordinating the work of the researcher, the graphic designer, and the writer.
+8:25
+In this video, you saw two communication patterns.
+8:29
+One was a linear one where your agents took actions one at a time until you got to the
+8:34
+end.
+8:35
+And the second had a marketing manager coordinating the activity of a few other agents.
+8:40
+It turns out that one of the key design decisions you may end up having to make when building
+8:45
+multi-agentic systems is what is the communication pattern between your different agents?
+8:50
+This is an area of hard research and there are multiple patterns emerging, but in the
+8:55
+next video, I want to show you what are some of the most common communication patterns
+8:59
+for getting your agents to work with each other.
+9:02
+Let's go see that in the next video.

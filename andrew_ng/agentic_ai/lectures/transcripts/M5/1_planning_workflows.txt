@@ -1,0 +1,156 @@
+0:02
+Welcome to this final module where you learn about design patterns that lets you build
+0:04
+highly autonomous agents, where you don't need to hard code in advance the sequence of steps to take,
+0:10
+but it can be more flexible and decide for itself what steps it wants to take to accomplish a task.
+0:16
+We'll talk about the planning design pattern and then later in this module,
+0:19
+how to build multi-agent systems. Let's dive in.
+0:23
+Suppose you run a sunglasses retail store and have information on what sunglasses are in your
+0:29
+inventory stored in a database. You might want a customer service agent to be able to answer
+0:35
+questions like, do you have any round sunglasses in stock? They're under $100. This is a fairly
+0:40
+complex query because you have to look through the product descriptions to see what sunglasses
+0:45
+are round, then look at what is in stock, and then finally see what's under $100 in order to tell the
+0:52
+customer, yes, we have classic sunglasses. How do you build an agent to answer a broad range of
+0:58
+customer queries like this and many others? In order to do so, we're going to give DLLM
+1:04
+a set of tools to let it get item descriptions, such as look up if different glasses are round,
+1:10
+check inventory, maybe process item returns, which is not needed for this query,
+1:15
+but we need it for other queries, get item price, check past transactions, process item sale,
+1:21
+and so on. In order to let an LLM figure out what's the right sequence of tools to use to respond to
+1:28
+the customer request, you might then write a prompt like this. You have access to the following tools
+1:34
+and give it a description of each of the, say, six tools or even more tools that the LLM has,
+1:40
+and to then tell it to return a step-by-step plan to carry out the user's request. In this case,
+1:47
+to answer this particular query, a reasonable plan that an LLM might output might be to first
+1:52
+use get item descriptions to check the different descriptions to find the round sunglasses,
+1:58
+and then use check inventory to see if they're in stock, and use get item price to see if the
+2:03
+in-stock results are less than $100. After an LLM outputs this plan with three steps, what we can do
+2:10
+is then take the step one text, that is this text written here in red, and pass that to an LLM,
+2:17
+maybe with additional context about what are the tools with your user query, with additional
+2:22
+background context, and toss an LLM to carry out step one. And in this case, hopefully the LLM will
+2:28
+choose to call the get item descriptions to get the appropriate descriptions of items,
+2:33
+and the output of that first step can let it select which are the round sunglasses,
+2:39
+and that output of step one is then passed together with the step two instructions, that
+2:44
+would be these instructions that I have here in blue, to an LLM to then execute the second step
+2:49
+of the plan. Hopefully it will then take the two pairs of round sunglasses we found on the previous
+2:54
+slide and check the inventory, and the output of that second step is then used to another LLM call,
+3:01
+where you have the output of the second step as well as the instructions of what to do for step
+3:05
+three. Pass the LLM to have it get the item price, and finally this output is fed back to
+3:11
+the LLM one last time to generate the final answer for the user. In this slide, I've simplified a lot
+3:17
+of details a little bit. The actual plan typically written by the LLM is more detailed than these
+3:22
+simple one-line instructions, but the basic workflow is to have an LLM write out multiple
+3:27
+steps of a plan, and then task it to execute each step of the plan in turn with some appropriate
+3:33
+surrounding context about what is the task, what are the tools available, and so on. And the
+3:38
+exciting thing about using an LLM to plan this way is that we did not have to decide in advance
+3:44
+what is the sequence in which to call tools in order to answer a fairly complex customer request.
+3:51
+If a customer were to make a different request, such as I would like to return the gold frame
+3:57
+glasses that I had purchased but not the metal frame ones, then you can imagine an LLM similarly
+4:04
+being able to come up with a different plan to figure out based on what they had purchased previously,
+4:09
+which glasses they had bought based on get item descriptions, where the gold frame ones they want
+4:13
+to return, and then maybe call process item return. So with an agent that can plan like this, it can
+4:19
+carry out a much wider range of tasks that can require calling many different tools in many
+4:24
+different orders. One more example of planning, let's take a look at an email assistant. If you
+4:29
+want to be the tele-assistant, so please reply to that email invitation from Bob Mould in New York,
+4:34
+tell him to attend and archive his email. Then an email assistant may be given tools like this to
+4:39
+search email, move an email, delete an email, and send an email. And you might write an assistant
+4:43
+prompt saying you have access to the following tools, and again, please return the step-by-step plan.
+4:47
+In this case, maybe the LLM will say the steps for this are to use search email to find the email from
+4:53
+Bob that mentioned dinner and New York, and then generate and send an email to confirm attendance,
+4:59
+and then lastly, move that email to the archive folder. Given this plan, which looks a reasonable
+5:03
+one, you would then again task an LLM step-by-step to carry out this plan. So the text from the first
+5:10
+step, shown here in red, will be fed to the LLM with additional background context, and hopefully
+5:15
+will trigger search email. Then the output of that can be given to an LLM again with the step
+5:21
+two instructions to send an appropriate response. And then finally, assuming the email was sent
+5:27
+successfully, you can take that output and have the LLM execute the third step of moving the email
+5:32
+from Bob into the archive folder. The planning design pattern is already used successfully
+5:38
+in many highly agentic coding systems, where if you ask it to write a piece of software to build
+5:44
+some fairly complex application, it might actually come up with a plan to build this component, build
+5:50
+this component, to almost form a checklist, and then do those steps one at a time to build a
+5:55
+decently complex piece of software. For many other applications, the use of planning is still
+6:01
+maybe more experimental. It's not in very widespread use. And one of the challenges of
+6:07
+planning is it makes the system sometimes a little bit hard to control, because you as a developer,
+6:12
+you don't really know at runtime what plan it will come up with. And so I think outside highly
+6:18
+agentic coding systems, where it actually works really well, adoption of planning is still growing
+6:24
+in other sectors. But this is exciting technology, and I think it will keep getting better and we'll
+6:29
+see it in more and more applications. The cool thing about building agents that can plan for
+6:34
+themselves is you don't need to hard code in advance the exact sequence of steps an LLM may
+6:39
+take to carry out a complex task. Now, I know that in this video, I've gone over the planning process
+6:45
+at a fairly high level, with it all putting a list of steps and then tasking an LLM to carry
+6:50
+out the steps of the plan one step at a time. But how does this actually work? In the next video,
+6:56
+we'll take a deeper dive to look further into the guts of what these plans actually look like,
+7:02
+and how the strings together to have an LLM plan and execute the plan for you.
+7:07
+Let's take a look at that in the next video.

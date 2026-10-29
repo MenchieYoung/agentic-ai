@@ -1,0 +1,84 @@
+0:06
+We've gone through a lot of tips for driving a disciplined, efficient process for building
+0:04
+agentic AI systems. I'd like to wrap up by sharing with you what it feels like to be going through
+0:10
+this process. When I'm building these workflows, I feel like there are two major activities I'm
+0:15
+often spending time on. One is building, so writing software, trying to write code to improve
+0:20
+my system. And the second, which sometimes doesn't feel like progress, but I think is equally
+0:26
+important, is analysis to help me decide where to focus my build efforts next. And I often go
+0:32
+back and forth between building and analyzing, including things like error analysis. So for
+0:37
+example, when building a new agentic workflow, I'll often start by quickly building an end-to-end
+0:43
+system, maybe even a quick and dirty implementation. And this lets me then start to examine the final
+0:49
+outputs of the end-to-end system, or also read through traces to get a sense of where it's doing
+0:53
+well, where it's doing poorly. Based on even just looking at traces, sometimes this will give me a
+0:58
+gut sense of which individual components I might want to improve. And so I might go tune some
+1:04
+individual components or keep tuning the overall end-to-end system. As my system starts to mature
+1:10
+a little bit more, then beyond just manually examining a few outputs and reading through
+1:15
+traces, I might start to build evals and have a small data set, maybe just 10-20 examples,
+1:20
+to compute metrics, at least on end-to-end performance. And this then further helps me
+1:26
+have a more refined perspective on how to improve the end-to-end system or how to improve individual
+1:31
+components. As it matures even further, my analysis then becomes maybe even more disciplined, where I
+1:37
+start to do error analysis and look through the components and try to count up how frequently
+1:42
+individual components led to subpar outputs. And this more rigorous analysis then lets me be even
+1:49
+more focused in deciding what components to work on next or inspire ideas for improving the overall
+1:54
+end-to-end system. And then eventually, when it's even more mature to drive more efficient improvements
+1:59
+at the component level, that's when I might also build component-level evals. And so the workflow
+2:05
+of building an agentic system often goes back and forth. It's not a linear process. We sometimes
+2:10
+tune the end-to-end system, then do some error analysis, then improve a component for a bit,
+2:14
+then tune the component-level evals. And I tend to bounce back and forth between these two types
+2:20
+of techniques. And what I see less experienced teams often do is spend a lot of time building
+2:26
+and probably much less time analyzing with error analysis, building evals, and so on. That would be
+2:31
+ideal because this is analysis that helps you really focus where to spend your time building.
+2:37
+And just one more tip. There are actually quite a few tools out there to help with monitoring traces,
+2:43
+logging runtime, computing costs, and so on. And those tools can be helpful. I sometimes use a few
+2:48
+of them, and quite a few of DeepMind.ai's short course partners offer those tools, and they do
+2:54
+work well. I find that for agentic workflows I end up working on, most agentic workflows are pretty
+2:59
+custom. And so I end up building pretty custom evals myself because I want to capture the things
+3:06
+that work incorrectly with my system. So even though I do use some of those tools, I also end
+3:11
+up building a lot of custom evals that are well fit to my specific application and the issues I
+3:17
+see with it. So thanks for sticking with me this far to the end of the fourth of five modules.
+3:25
+If you're able to implement even a fraction of the ideas from this module, I think you'll be
+3:31
+well ahead of the vast majority of developers in terms of your sophistication at implementing
+3:37
+agentic workflows. Hope you found these materials useful, and I look forward to seeing you in the
+3:43
+final module. We'll talk about some more advanced design patterns for building
+3:47
+highly autonomous agents. I'll see you in the last module of this course.

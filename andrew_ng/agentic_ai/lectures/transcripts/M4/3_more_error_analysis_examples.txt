@@ -1,0 +1,158 @@
+0:05
+I found that for many developers, it's only by seeing multiple examples that you can then
+0:05
+get practice and hone your intuitions about how to carry out error analysis.
+0:09
+So let's take a look at two more examples, and we'll look at invoice processing
+0:13
+and responding to customer emails.
+0:15
+Here's the workflow that we had for invoice processing, where we had a clear process to
+0:21
+follow an agentic workflow of identifying the four required fields and then recording
+0:26
+them in a database.
+0:28
+In the example from the first video of this module, we said that the system was often
+0:32
+making a mistake in the due date of the invoice.
+0:35
+So we can carry out error analysis to try to figure out which of the components it may
+0:40
+have been due to.
+0:41
+So for example, did the PDF to text make a mistake, or did the LM extract the wrong date
+0:46
+out of whatever was output from the PDF to text component?
+0:50
+To carry out an error analysis, I would try to find a number of examples where the data
+0:55
+extracted is incorrect.
+0:57
+So same as the last video, it's useful to focus on the examples where the performance
+1:01
+is subpar to try to figure out what went wrong with those examples.
+1:05
+So ignore the examples that got the date right, but try to find somewhere between 10 and 100
+1:10
+invoices where it got the date wrong.
+1:12
+And then I would look through to try to figure out was the cause of the problem that PDF
+1:17
+to text got the date wrong, or was it that the LM, given the PDF to text output, pulled
+1:23
+out the wrong date?
+1:24
+And so you might build up a little spreadsheet like this and go through 20 invoices and just
+1:29
+count up how often did PDF to text extract the dates or the text incorrectly so that
+1:35
+even a human couldn't tell what is the due date versus the PDF to text look good enough,
+1:39
+but the LM, when asked to pull the dates, somehow pulled out the wrong date, like maybe
+1:44
+identifying the invoice date rather than the due date of the invoice.
+1:48
+So in this example, it looks like the LM data extraction was responsible for a lot
+1:52
+more errors.
+1:52
+So this tells me that maybe I should focus my efforts on the LM data extraction component
+1:57
+rather than on PDF to text.
+1:59
+And this is important because if not for this error analysis, I can imagine some teams spending
+2:04
+weeks or months trying to tune the PDF to text only to discover after that time that
+2:09
+it did not make much of an impact to the final system's performance.
+2:13
+Oh, and by the way, these percentages here at the bottom can add up not to 100% because
+2:19
+these errors are not mutually exclusive.
+2:21
+To look at one last example, let's go back to the agentic workflow for responding to
+2:26
+customer emails, where the LM, given a customer email like this, asking for an order, would
+2:33
+pull up the order details, fetch the information from the database, then draft a response for
+2:38
+a human to review.
+2:39
+So again, I would find a number of examples where, for whatever reason, the final output
+2:45
+is unsatisfactory and then try to figure out what had gone wrong.
+2:49
+And so some things that could go wrong.
+2:51
+Maybe the LM had written an incorrect database query.
+2:55
+So when the query was sent to the database, it just did not successfully pull up the customer
+3:01
+info.
+3:01
+Or maybe the database has corrupted data.
+3:04
+So even though the LM wrote a completely appropriate database query, maybe in SQL or some other
+3:09
+query language, the database did not have the correct information.
+3:12
+Or maybe given the correct information about the customer order, the LM wrote an email
+3:17
+that was somehow not quite right.
+3:19
+So again, I would look through a handful of emails where the final output was unsatisfactory
+3:24
+and try to figure out what had gone wrong.
+3:26
+So maybe in email one, we find that the LM had asked for the wrong table in the query,
+3:30
+just asked for the wrong data in the way it created the database.
+3:33
+In email two, maybe I find that the database actually has an error.
+3:38
+And maybe given that input, the LM somehow wrote a subalternate email as well, and so
+3:43
+on.
+3:43
+And in this example, after going through many emails, maybe I find that the most common
+3:49
+error is in the way the LM is writing a database query, say a SQL query, in order to fetch
+3:56
+the relevant information.
+3:57
+Whereas the database is mostly correct, although there's a little bit of data errors there.
+4:01
+And the way the LM writes the email also has some errors.
+4:05
+Maybe it doesn't quite where they write 30% of the time.
+4:08
+And this tells me that it'd be most worthwhile maybe for me to improve the way the LM is
+4:12
+writing queries.
+4:13
+Second most important would be maybe improve the prompting for how I write the final email.
+4:19
+That an analysis like this can tell you that 75% of the errors, maybe the system gets lots
+4:24
+of things right, but of all the things it gets not quite right, 75% of the problems
+4:28
+is from the database query.
+4:30
+This is incredibly helpful information to tell you where to focus your efforts.
+4:35
+When I'm developing agentic AI workflows, I'll often use this type of error analysis
+4:39
+to tell me where to focus my attention in terms of what to work on next.
+4:44
+When you've made that determination, it turns out that to complement the end-to-end
+4:49
+evals that we spoke about earlier in this module, it's often useful to evaluate not
+4:54
+just the entire end-to-end system, but also individual components, because that can make
+4:59
+you more efficient in how you improve the one component that, say, error analysis has
+5:04
+caused you to decide to focus your attention on.
+5:07
+So let's go on to the next video to learn about component-level evals.
