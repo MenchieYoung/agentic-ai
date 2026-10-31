@@ -1,6 +1,6 @@
 # M2 — Reflection Design Pattern (Interview-Oriented Notes)
 
-> Source: all 5 video transcripts of Module 2 of Andrew Ng's *Agentic AI* course + the lecture PDF.
+> Source basis: five local transcript files attributed to Module 2 course videos plus the locally stored lecture PDF.
 
 ## Module Overview
 **Reflection = having an LLM look back at and improve its own output**, and it's surprisingly simple to implement. The core intuition running throughout: reflection is **not magic and not 100% reliable**; pure self-reflection gives only a **modest** bump; but when you bring in **external feedback (feedback from outside the LLM)**, it becomes **much more powerful** — introduced in section 1, deepened in section 5.

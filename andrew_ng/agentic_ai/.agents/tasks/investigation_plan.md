@@ -1,5 +1,7 @@
 # Investigation Plan: Agentic AI Course Repository Authenticity Analysis
 
+> **Historical planning document.** It records the original requirements, hypotheses, and investigation process. Terms such as “official” and “authentic” describe questions the investigation intended to test, not provenance that this project can independently certify. Current learner-facing provenance language is maintained in `practice/README.md`.
+
 ## Executive Summary
 
 This plan guides a systematic investigation of three GitHub repositories to determine which contains the most authentic, course-official materials from Andrew Ng's "Agentic AI" course on DeepLearning.AI.

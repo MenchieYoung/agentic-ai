@@ -1,21 +1,21 @@
 # Andrew Ng's Agentic AI Course - Practice Materials
 
-## 🎓 Authentic Course Materials
+## Course-Derived Practice Materials
 
-This directory contains **authentic course materials** from Andrew Ng's Agentic AI course, sourced from the [jeffmasc/agentic_ai_andrew_ng](https://github.com/jeffmasc/agentic_ai_andrew_ng) repository. These are the actual graded assignments and ungraded lab demos used in the Coursera course.
+This directory combines local notes, AI-generated study aids, and assignment/lab copies sourced from the public learner repository [jeffmasc/agentic_ai_andrew_ng](https://github.com/jeffmasc/agentic_ai_andrew_ng). Naming conventions and included grader files suggest that some copies originated from DeepLearning.AI's **Agentic AI** course, but this project has not independently verified every file against the current course platform. Treat them as course-derived study copies, not an official DeepLearning.AI distribution.
 
 ---
 
 ## ⚠️ Quiz Notice
 
-**No official quiz questions are included.** Quiz questions are platform-locked on Coursera and cannot be legally extracted. 
+**No course quiz questions are included.** No quiz-question files were found in the three mirrored learner repositories. Use the quizzes on the official DeepLearning.AI course platform for the course's own assessments.
 
 The `quiz.md` files in each module are **AI-generated study aids** created for self-assessment purposes. They contain:
-- ⚠️ **Prominent disclaimers** - Not official Coursera questions
-- 📚 **Study questions** - Based on lecture concepts and materials
+- ⚠️ **Prominent disclaimers** - Not DeepLearning.AI course quiz questions
+- 📚 **Study questions** - Based on local lecture notes and transcripts
 - 🔍 **Self-check tools** - Use them to test your understanding
 
-**These are NOT the real quiz questions from the course.**
+**These are not the course platform's quiz questions.**
 
 ---
 
@@ -30,9 +30,9 @@ The `quiz.md` files in each module are **AI-generated study aids** created for s
 | **Module 5: Multi-Agent** | ✅ C1M5_Assignment.ipynb | ✅ 2 demos | ⚠️ AI-generated |
 
 **Legend:**
-- ✅ = Authentic material included
-- ❌ = Not available (no graded assignment for this module)
-- ⚠️ = AI-generated or status uncertain
+- ✅ = Course-derived copy included
+- ❌ = Not included in this practice package
+- ⚠️ = AI-generated or provenance not independently verified
 
 ---
 
@@ -61,11 +61,19 @@ jupyter notebook C1M2_Assignment.ipynb
 ### END CODE HERE ###
 ```
 
-### Step 3: Run Unit Tests Locally
-Verify your solution with the provided unit tests:
+### Step 3: Run Tests Locally
+After filling the exercise placeholders, run the tests from that module's directory:
 
 ```bash
 python unittests.py
+```
+
+The local runner extracts the graded functions from the adjacent assignment notebook and substitutes deterministic model responses. It requires no API key, makes no network requests, and exits with a nonzero status when an exercise fails. The untouched starter notebook is expected to fail until you implement it.
+
+To verify the test harness itself against the supplied solution:
+
+```bash
+python unittests.py --notebook C1M2_Assignment_Solution.ipynb
 ```
 
 ### Step 4: Check Solution (After Genuine Attempt)
@@ -80,21 +88,23 @@ jupyter notebook C1M2_Assignment_Solution.ipynb
 
 ## 📖 Recommended Learning Path
 
-1. **Watch lecture videos** on Coursera (or your video notes)
-2. **Try AI-generated quiz** (optional self-check, not official questions)
+1. **Watch the course videos** on the [DeepLearning.AI learning platform](https://learn.deeplearning.ai/courses/agentic-ai/information), or review the local transcript-based notes
+2. **Try the AI-generated quiz** as an optional self-check
 3. **Explore ungraded demos** to see concepts in action
-4. **Complete graded assignment** - fill in the exercise blanks yourself
-5. **Run unit tests** to verify your implementation
-6. **Compare with solution** only after genuine attempt
+4. **Complete the assignment copy** by filling in the exercise blanks
+5. **Run the local tests** to verify the implementation wiring
+6. **Compare with the supplied solution copy** only after a genuine attempt
 
 ---
 
 ## 💡 Important Notes
 
-### About the Autograder
-- ⚠️ **Autograder won't work** without active Coursera course enrollment
-- ✅ **Unit tests are for local verification** - use `python unittests.py`
-- 📝 **Autograder directory included** for reference (you won't need it for practice)
+### About Testing
+- ✅ Run `python unittests.py` from the assignment directory after completing the placeholders.
+- ✅ Local tests use fake model responses, so they require no API key and incur no API cost.
+- ✅ The same `test_*` helpers also run from the notebook's test cells.
+- ⚠️ These tests check function wiring, model-call arguments, tool-result bookkeeping, and return contracts. They do not grade prose quality or verify live APIs.
+- 📝 The imported course-platform autograder remains under `autograder/` for reference and is not used by the local runner.
 
 ### About Exercise Blanks
 - ✅ **Exercise blanks are preserved** in `C1MX_Assignment.ipynb` files
@@ -147,11 +157,12 @@ module5_multiagent/
 
 ---
 
-## 📚 Source
+## Sources and Provenance
 
-Authentic course materials sourced from:
-- **Primary:** [jeffmasc/agentic_ai_andrew_ng](https://github.com/jeffmasc/agentic_ai_andrew_ng)
-- **Quiz files:** AI-generated study aids (not official Coursera quizzes)
+- **Course:** [Agentic AI](https://learn.deeplearning.ai/courses/agentic-ai/information), taught by Andrew Ng on DeepLearning.AI
+- **Primary learner repository:** [jeffmasc/agentic_ai_andrew_ng](https://github.com/jeffmasc/agentic_ai_andrew_ng)
+- **Assignment and demo status:** Course-derived copies from public learner repositories; not independently verified as unmodified official distributions
+- **Quiz files:** AI-generated study aids, not DeepLearning.AI course quiz questions
 
 ---
 
@@ -159,6 +170,6 @@ Authentic course materials sourced from:
 
 1. **Don't skip demos** - They provide valuable context before the graded assignment
 2. **Read instructions carefully** - Each assignment has specific requirements
-3. **Test incrementally** - Run unit tests after completing each exercise section
+3. **Test incrementally** - Run the deterministic local tests after completing each exercise section
 4. **Understand, don't copy** - Solutions are for learning, not shortcuts
 5. **Keep lecture notes handy** - Reference course concepts while coding

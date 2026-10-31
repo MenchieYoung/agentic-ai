@@ -1,6 +1,6 @@
 # M1 — Introduction to Agentic Workflows (Interview-Oriented Notes)
 
-> Source: all 8 video transcripts of Module 1 of Andrew Ng's *Agentic AI* course (Andrew's actual narration) + the lecture PDF. Transcripts are the primary source; the PDF supplies figures/benchmarks.
+> Source basis: eight local transcript files attributed to Module 1 course videos plus the locally stored lecture PDF. The transcripts are the primary basis; the PDF supplies figures and benchmarks.
 
 ## Module Overview (the throughline in one line)
 M1 answers four questions: **what is agentic AI → how autonomous (degrees of autonomy) → why it's useful (benefits) → how to build it (applications → task decomposition → evals → the four design patterns)**. Two core skills are hammered throughout the whole course: **task decomposition** and **a disciplined development process centered on evals and error analysis**. The running example across the course is a **research agent**.

@@ -1,5 +1,7 @@
 # Andrew Ng's Agentic AI Course - Practice Materials Summary
 
+> **历史文档，仅保留用于追踪项目演变。** 本文件描述的是较早版本的 AI 生成练习包，目录和命令已过时。请使用当前的 `practice/README.md` 和 `practice/practice_guide.md`。
+
 ✅ **完成状态：已全部创建完成！**
 
 ## 📦 已创建的完整学习包

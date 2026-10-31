@@ -2,15 +2,15 @@
 
 > ⚠️ **DISCLAIMER: AI-Generated Study Aid**
 > 
-> This quiz was created by AI as a study aid based on course lecture content.
-> **These are NOT the official course quiz questions**, which are platform-locked on Coursera.
+> This quiz was created by AI as a study aid based on the local transcript-based notes.
+> **These are not DeepLearning.AI course quiz questions.** No quiz-question files were found in the mirrored learner repositories.
 > 
 > Use these questions to:
-> - Test your understanding of lecture concepts
-> - Prepare for the actual course quizzes
-> - Review key topics before moving to coding exercises
+> - Test your understanding of the local notes
+> - Identify concepts to review
+> - Prepare for coding exercises
 > 
-> The official course uses different questions that you can only access through Coursera enrollment.
+> Use the [official DeepLearning.AI course](https://learn.deeplearning.ai/courses/agentic-ai/information) for its current assessments.
 
 ## Instructions
 - This quiz contains 12 multiple-choice questions

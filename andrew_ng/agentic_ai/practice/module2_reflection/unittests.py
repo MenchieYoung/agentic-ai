@@ -1,150 +1,179 @@
-from dlai_grader.grading import test_case, print_feedback
-from types import FunctionType
+"""Self-contained local tests for the Module 2 assignment.
 
-# Neutral inputs
-_DRAFT_IN = "x"  # for generate_draft
-_DRAFT_TXT = "A" * 120  # a draft with length > 100
-_FEEDBACK = "B" * 60  # arbitrary feedback
+The notebook imports this module and passes each completed function to the
+matching ``test_*`` helper. The command-line runner can also extract the graded
+functions from a notebook and test them without API keys or network calls.
+"""
 
+from __future__ import annotations
 
-# =========================
-# Test 1: generate_draft
-# =========================
-def test_generate_draft(learner_func):
-    def g():
-        function_name = "generate_draft"
-        cases = []
-        # Type check
-        t = test_case()
-        if not isinstance(learner_func, FunctionType):
-            t.failed = True
-            t.msg = f"{function_name} has incorrect type"
-            t.want = FunctionType
-            t.got = type(learner_func)
-            return [t]
-        # Call and error handling
-        try:
-            out = learner_func(_DRAFT_IN)
-        except Exception as e:
-            t = test_case()
-            t.failed = True
-            t.msg = f"{function_name} raised {type(e).__name__}: {e}"
-            t.want = "no exception"
-            t.got = str(e)
-            return [t]
-        # Must return str
-        t = test_case()
-        if not isinstance(out, str):
-            t.failed = True
-            t.msg = f"{function_name} must return a str"
-            t.want = str
-            t.got = type(out)
-            return [t]
+import argparse
+import ast
+from contextlib import contextmanager
+import json
+from pathlib import Path
+from types import SimpleNamespace
+from typing import Callable, Iterator
 
-        # Length > 100
-        t = test_case()
-        if len(out) <= 100:
-            t.failed = True
-            t.msg = (
-                f"{function_name} must return text with length > 100 (got {len(out)})"
-            )
-            t.want = "> 100 chars"
-            t.got = len(out)
-        cases.append(t)
-        return cases
-
-    cases = g()
-    print_feedback(cases)
+_DRAFT_IN = "How external feedback improves reflection"
+_DRAFT_TEXT = "A" * 120
+_FEEDBACK = "Improve the structure, clarity, supporting evidence, and conclusion."
+_LONG_RESPONSE = (
+    "This deterministic mock response is intentionally longer than one hundred "
+    "characters so the local test can verify the assignment's return contract "
+    "without making a paid language-model request."
+)
 
 
-# =========================
-# Test 2: reflect_on_draft
-# =========================
-def test_reflect_on_draft(learner_func):
-    def g():
-        function_name = "reflect_on_draft"
-        cases = []
-        # Type check
-        t = test_case()
-        if not isinstance(learner_func, FunctionType):
-            t.failed = True
-            t.msg = f"{function_name} has incorrect type"
-            t.want = FunctionType
-            t.got = type(learner_func)
-            return [t]
-        # Call and error handling
-        try:
-            out = learner_func(_DRAFT_TXT)
-        except Exception as e:
-            t = test_case()
-            t.failed = True
-            t.msg = f"{function_name} raised {type(e).__name__}: {e}"
-            t.want = "no exception"
-            t.got = str(e)
-            return [t]
+class _FakeCompletions:
+    def __init__(self, responses: list[str]):
+        self._responses = iter(responses)
+        self.calls: list[dict] = []
+
+    def create(self, **kwargs):
+        self.calls.append(kwargs)
+        content = next(self._responses)
+        message = SimpleNamespace(content=content, tool_calls=[])
+        return SimpleNamespace(choices=[SimpleNamespace(message=message)])
+
+
+class _FakeClient:
+    def __init__(self, responses: list[str]):
+        self.chat = SimpleNamespace(completions=_FakeCompletions(responses))
+
+
+@contextmanager
+def _patched_client(learner_func: Callable, responses: list[str]) -> Iterator[_FakeClient]:
+    globals_dict = learner_func.__globals__
+    sentinel = object()
+    previous = globals_dict.get("CLIENT", sentinel)
+    client = _FakeClient(responses)
+    globals_dict["CLIENT"] = client
+    try:
+        yield client
+    finally:
+        if previous is sentinel:
+            del globals_dict["CLIENT"]
         else:
-            cases.append(t)
-        # Must return str
-        t = test_case()
-        if not isinstance(out, str):
-            t.failed = True
-            t.msg = f"{function_name} must return a str"
-            t.want = str
-            t.got = type(out)
-        else:
-            cases.append(t)
-
-        return cases
-
-    cases = g()
-    print_feedback(cases)
+            globals_dict["CLIENT"] = previous
 
 
-# =========================
-# Test 3: revise_draft
-# =========================
-def test_revise_draft(learner_func):
-    def g():
-        function_name = "revise_draft"
-        cases = []
-        # Type check
-        t = test_case()
-        if not isinstance(learner_func, FunctionType):
-            t.failed = True
-            t.msg = f"{function_name} has incorrect type"
-            t.want = FunctionType
-            t.got = type(learner_func)
-            return [t]
-        # Call and error handling
+def _require(condition: bool, message: str) -> None:
+    if not condition:
+        raise AssertionError(message)
+
+
+def _request_prompt(client: _FakeClient) -> str | None:
+    call = client.chat.completions.calls[0]
+    messages = call.get("messages")
+    if not isinstance(messages, list) or not messages:
+        return None
+    first = messages[0]
+    return first.get("content") if isinstance(first, dict) else None
+
+
+def test_generate_draft(learner_func: Callable) -> None:
+    """Verify the prompt and return contract without calling an LLM."""
+    _require(callable(learner_func), "generate_draft must be callable")
+    with _patched_client(learner_func, [_LONG_RESPONSE]) as client:
+        output = learner_func(_DRAFT_IN)
+
+    prompt = _request_prompt(client)
+    _require(isinstance(prompt, str) and prompt.strip(), "prompt must be a non-empty string")
+    _require(_DRAFT_IN in prompt, "prompt must include the requested topic")
+    _require(isinstance(output, str), "generate_draft must return a string")
+    _require(len(output) > 100, "generate_draft must return more than 100 characters")
+    print("✓ generate_draft")
+
+
+def test_reflect_on_draft(learner_func: Callable) -> None:
+    """Verify that reflection sends the original draft to the model."""
+    _require(callable(learner_func), "reflect_on_draft must be callable")
+    with _patched_client(learner_func, [_LONG_RESPONSE]) as client:
+        output = learner_func(_DRAFT_TEXT)
+
+    prompt = _request_prompt(client)
+    _require(isinstance(prompt, str) and prompt.strip(), "prompt must be a non-empty string")
+    _require(_DRAFT_TEXT in prompt, "reflection prompt must include the draft")
+    _require(isinstance(output, str), "reflect_on_draft must return a string")
+    print("✓ reflect_on_draft")
+
+
+def test_revise_draft(learner_func: Callable) -> None:
+    """Verify that revision uses both the draft and its feedback."""
+    _require(callable(learner_func), "revise_draft must be callable")
+    with _patched_client(learner_func, [_LONG_RESPONSE]) as client:
+        output = learner_func(_DRAFT_TEXT, _FEEDBACK)
+
+    _require(client.chat.completions.calls, "revise_draft must call CLIENT.chat.completions.create")
+    prompt = _request_prompt(client)
+    _require(isinstance(prompt, str) and prompt.strip(), "prompt must be a non-empty string")
+    _require(_DRAFT_TEXT in prompt, "revision prompt must include the original draft")
+    _require(_FEEDBACK in prompt, "revision prompt must include the reflection feedback")
+    _require(isinstance(output, str), "revise_draft must return a string")
+    _require(len(output) > 100, "revise_draft must return more than 100 characters")
+    print("✓ revise_draft")
+
+
+def _load_functions(notebook_path: Path, names: list[str]) -> dict[str, Callable]:
+    notebook = json.loads(notebook_path.read_text(encoding="utf-8"))
+    namespace: dict = {}
+    found: dict[str, Callable] = {}
+
+    for cell in notebook.get("cells", []):
+        if cell.get("cell_type") != "code":
+            continue
+        source = "".join(cell.get("source", []))
         try:
-            out = learner_func(_DRAFT_TXT, _FEEDBACK)
-        except Exception as e:
-            t = test_case()
-            t.failed = True
-            t.msg = f"{function_name} raised {type(e).__name__}: {e}"
-            t.want = "no exception"
-            t.got = str(e)
-            return [t]
-        # Must return str
-        t = test_case()
-        if not isinstance(out, str):
-            t.failed = True
-            t.msg = f"{function_name} must return a str"
-            t.want = str
-            t.got = type(out)
-            return [t]
-        # Length > 100
-        t = test_case()
-        if len(out) <= 100:
-            t.failed = True
-            t.msg = (
-                f"{function_name} must return text with length > 100 (got {len(out)})"
-            )
-            t.want = "> 100 chars"
-            t.got = len(out)
-        cases.append(t)
+            tree = ast.parse(source)
+        except SyntaxError:
+            continue
+        for node in tree.body:
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name in names:
+                module = ast.Module(body=[node], type_ignores=[])
+                ast.fix_missing_locations(module)
+                exec(compile(module, str(notebook_path), "exec"), namespace)
+                found[node.name] = namespace[node.name]
 
-        return cases
+    missing = sorted(set(names) - set(found))
+    if missing:
+        raise RuntimeError(f"Could not find graded functions: {', '.join(missing)}")
+    return found
 
-    cases = g()
-    print_feedback(cases)
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="Run deterministic local tests for Module 2")
+    parser.add_argument(
+        "--notebook",
+        type=Path,
+        default=Path(__file__).with_name("C1M2_Assignment.ipynb"),
+        help="Notebook to test (defaults to C1M2_Assignment.ipynb)",
+    )
+    args = parser.parse_args()
+    notebook_path = args.notebook.resolve()
+    if not notebook_path.is_file():
+        parser.error(f"notebook not found: {notebook_path}")
+
+    tests = [
+        ("generate_draft", test_generate_draft),
+        ("reflect_on_draft", test_reflect_on_draft),
+        ("revise_draft", test_revise_draft),
+    ]
+    functions = _load_functions(notebook_path, [name for name, _ in tests])
+    failures = 0
+    for name, test in tests:
+        try:
+            test(functions[name])
+        except Exception as exc:
+            failures += 1
+            print(f"✗ {name}: {exc}")
+
+    if failures:
+        print(f"\n{failures} of {len(tests)} local tests failed.")
+        return 1
+    print(f"\nAll {len(tests)} local tests passed. No API calls were made.")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

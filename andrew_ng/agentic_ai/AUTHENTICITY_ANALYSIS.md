@@ -1,5 +1,7 @@
 # Authenticity Analysis: Andrew Ng's Agentic AI Course Repositories
 
+> **Historical preliminary report, retained for audit only.** This report overstates what repository markers can prove. The presence of `dlai_grader`, course-like filenames, branding, or lecture PDFs supports a **course-derived** classification but does not prove that a file is official, unmodified, or authorized for redistribution. The selected GitHub source describes itself as a learner's repository, not an official DeepLearning.AI repository. Current learner-facing documentation uses the more cautious provenance language in `practice/README.md`.
+
 **Analysis Date:** 2024-10-26  
 **Purpose:** Identify the most authentic, course-official materials for quiz questions and lab exercises
 

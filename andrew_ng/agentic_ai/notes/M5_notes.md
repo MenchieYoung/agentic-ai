@@ -1,6 +1,6 @@
 # M5 — Patterns for Highly Autonomous Agents (Planning & Multi-Agent, Interview-Oriented Notes)
 
-> Source: all 6 video transcripts of Module 5 of Andrew Ng's *Agentic AI* course + the lecture PDF.
+> Source basis: six local transcript files attributed to Module 5 course videos plus the locally stored lecture PDF.
 
 ## Module Overview
 M5 covers **highly autonomous agents**: no longer hard-coding the sequence of steps — letting the system decide for itself. Two main themes: **Planning** and **Multi-agent**. A core trade-off runs throughout: **give up some control (harder to control / you don't know at runtime what will happen) in exchange for a much wider range of tasks.**

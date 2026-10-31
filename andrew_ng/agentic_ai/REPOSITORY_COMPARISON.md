@@ -1,5 +1,7 @@
 # Andrew Ng Agentic AI Course - 仓库对比分析
 
+> **历史文档，仅保留用于追踪项目演变。** 本报告的推荐早于后续仓库调查，包含已经过时的目录、结论和“官方”材料表述。当前使用说明及来源可信度以 `practice/README.md` 为准。
+
 ## 📊 三个仓库对比
 
 ### 1. qingqingye/agenticai_andrew_jupyternotebook

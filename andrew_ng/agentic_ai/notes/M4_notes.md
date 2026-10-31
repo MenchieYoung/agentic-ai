@@ -1,6 +1,6 @@
 # M4 — Practical Tips for Building Agentic AI (Evals & Error Analysis, Interview-Oriented Notes)
 
-> Source: all 7 video transcripts of Module 4 of Andrew Ng's *Agentic AI* course + the lecture PDF. Andrew himself calls M4 the material "you'll find most useful" for long-term agentic building.
+> Source basis: seven local transcript files attributed to Module 4 course videos plus the locally stored lecture PDF. The transcript attributes the description "you'll find most useful" for long-term agentic building to Andrew Ng.
 
 ## Module Overview (core methodology)
 M4 covers the **engineering practice** — the part interviewers are most likely to drill into. The core:

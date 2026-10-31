@@ -5,8 +5,8 @@ This module introduces the reflection pattern, where agents review and improve t
 
 ## What's Available
 
-### ✅ Official Course Materials
-- **C1M2_Assignment.ipynb**: Official graded programming assignment
+### Course-Derived Copies
+- **C1M2_Assignment.ipynb**: Learner assignment copy with exercise placeholders
 - **demos/chart_generation/**: Ungraded lab on chart generation with reflection
 - **demos/sql_reflection/**: Ungraded lab on SQL query refinement
 
@@ -25,8 +25,8 @@ This module introduces the reflection pattern, where agents review and improve t
    - Then try `demos/sql_reflection/M2_UGL_2.ipynb`
 3. **Work on graded assignment**: `C1M2_Assignment.ipynb`
    - Implement reflection logic
-   - Test your solution
-   - Submit for grading
+   - Run `python unittests.py` from this directory; it uses fake model responses and makes no API calls
+   - Run the notebook normally afterward to inspect live model quality
 4. **Optional**: Review quiz.md to test your understanding
 
 ## Key Concepts

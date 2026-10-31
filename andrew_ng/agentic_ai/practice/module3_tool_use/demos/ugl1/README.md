@@ -1,6 +1,6 @@
 # Module 3 - Ungraded Demo Lab 1: Basic Tool Use
 
-This is an **ungraded demo lab** from the original course materials, provided for reference and practice.
+This is a **course-derived ungraded demo copy** from a public learner repository, provided for reference and practice. It has not been independently verified against the current DeepLearning.AI platform.
 
 ## Content
 - **M3_UGL_1.ipynb**: Main notebook demonstrating basic tool use patterns

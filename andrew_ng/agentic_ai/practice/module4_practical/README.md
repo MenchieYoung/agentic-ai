@@ -13,8 +13,8 @@ This module focuses on practical aspects of deploying agentic systems: evaluatio
 - **exercise_evaluation.py**: Practice exercises on evaluation techniques
 - **solution_evaluation.py**: Reference solutions for evaluation exercises
 
-### ❌ No Official Graded Assignment
-Module 4 does not have a graded programming assignment in the original course. The focus is on understanding evaluation methodologies and best practices.
+### No Course-Derived Graded Assignment Included
+No Module 4 graded programming assignment was found in the mirrored learner repositories. This directory currently contains AI-generated practice material; a course-derived ungraded lab will be handled separately.
 
 ## Learning Path
 

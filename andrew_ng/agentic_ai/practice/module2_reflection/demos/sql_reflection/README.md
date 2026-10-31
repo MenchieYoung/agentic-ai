@@ -1,6 +1,6 @@
 # Module 2 - Ungraded Demo Lab 2: SQL Query Reflection
 
-This is an **ungraded demo lab** from the original course materials, provided for reference and practice.
+This is a **course-derived ungraded demo copy** from a public learner repository, provided for reference and practice. It has not been independently verified against the current DeepLearning.AI platform.
 
 ## Content
 - **M2_UGL_2.ipynb**: Main notebook demonstrating agentic reflection for SQL query generation

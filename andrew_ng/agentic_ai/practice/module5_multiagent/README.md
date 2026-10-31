@@ -5,8 +5,8 @@ This module introduces multi-agent coordination, where multiple AI agents collab
 
 ## What's Available
 
-### ✅ Official Course Materials
-- **C1M5_Assignment.ipynb**: Official graded programming assignment
+### Course-Derived Copies
+- **C1M5_Assignment.ipynb**: Learner assignment copy with exercise placeholders
 - **demos/ugl1/**: Ungraded lab on basic multi-agent coordination
 - **demos/ugl2/**: Ungraded lab on advanced multi-agent patterns
 
@@ -26,8 +26,8 @@ This module introduces multi-agent coordination, where multiple AI agents collab
 3. **Work on graded assignment**: `C1M5_Assignment.ipynb`
    - Design a multi-agent system
    - Implement agent coordination
-   - Test collaborative behaviors
-   - Submit for grading
+   - Run `python unittests.py` from this directory; it uses fake model responses and makes no API or network calls
+   - Run the notebook normally afterward to evaluate the live workflow
 4. **Optional**: Review quiz.md to test your understanding
 
 ## Key Concepts

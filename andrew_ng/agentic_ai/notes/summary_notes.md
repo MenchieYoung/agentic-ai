@@ -1,14 +1,14 @@
 # Agentic AI (Andrew Ng / DeepLearning.AI) — Interview-Oriented Overview + Index
 
 - **Course:** Agentic AI — DeepLearning.AI, instructor Andrew Ng
-- **Course link:** https://www.deeplearning.ai/alpha/courses/agentic-ai
+- **Course link:** https://learn.deeplearning.ai/courses/agentic-ai/information
 
 **How to use these notes (two layers):**
 
 - **This file = interview overview + index + cross-module cheat sheet + rapid-fire Q&A.** Skim this one before an interview to answer most questions.
 - **`M1_notes.md … M5_notes.md` = detailed per-module notes (the video-explanation layer).** When a point is fuzzy, open the relevant module for Andrew's intuition, worked examples, and that module's interview Q&A.
 
-**Source:** everything is built from the course's 32 video transcripts (Andrew's actual narration) + the 5 lecture PDFs.
+**Source basis:** these notes were synthesized from the 32 local transcript files attributed to the course videos and the five locally stored lecture PDFs. Consult the current DeepLearning.AI course platform for authoritative course content.
 
 ---
 

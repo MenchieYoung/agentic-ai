@@ -5,8 +5,8 @@ This module covers how agents interact with external tools and APIs through func
 
 ## What's Available
 
-### ✅ Official Course Materials
-- **C1M3_Assignment.ipynb**: Official graded programming assignment
+### Course-Derived Copies
+- **C1M3_Assignment.ipynb**: Learner assignment copy with exercise placeholders
 - **demos/ugl1/**: Ungraded lab on basic function calling
 - **demos/ugl2/**: Ungraded lab on advanced tool integration
 
@@ -26,7 +26,8 @@ This module covers how agents interact with external tools and APIs through func
 3. **Work on graded assignment**: `C1M3_Assignment.ipynb`
    - Implement tool calling logic
    - Handle tool responses and errors
-   - Submit for grading
+   - Run `python unittests.py` from this directory; it uses fake model and tool responses and makes no external requests
+   - Run the notebook normally afterward to verify live APIs
 4. **Optional**: Review quiz.md to test your understanding
 
 ## Key Concepts

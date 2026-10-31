@@ -2,47 +2,47 @@
 
 ## Overview
 
-This guide helps you work through **authentic Andrew Ng Agentic AI course materials** sourced from the jeffmasc repository. These materials are designed to match the official Coursera course experience as closely as possible.
+This guide covers local study materials for Andrew Ng's **Agentic AI** course on DeepLearning.AI. The package combines transcript-based notes, AI-generated study aids, and assignment/lab copies from public learner repositories.
 
-## Materials Authenticity
+## Provenance Categories
 
-### ✅ Graded Assignments (AUTHENTIC)
-- **Source**: Official course assignments from jeffmasc/agentic_ai_andrew_ng
-- **Status**: **Identical to official Coursera course assignments**
+### Course-Derived Assignment Copies
+- **Primary source**: The public learner repository `jeffmasc/agentic_ai_andrew_ng`
+- **Verification level**: Naming, notebook structure, and grader files are consistent with course-derived material, but this project has not compared every file with the current DeepLearning.AI platform
 - **Available for**: Modules 2, 3, and 5
-- **Format**: Jupyter notebooks with exercise blanks (### START CODE HERE ###)
-- **Testing**: Includes unit tests (`unittests.py`) for local validation
+- **Format**: Jupyter notebooks with exercise placeholders (`### START CODE HERE ###`)
+- **Testing**: Self-contained deterministic local tests
 
-### ✅ Ungraded Demos (AUTHENTIC)
-- **Source**: Official reference implementations from course materials
-- **Purpose**: Explore concepts before attempting graded assignments
-- **Format**: Complete working examples (no blanks to fill)
+### Course-Derived Demo Copies
+- **Source**: Public learner repositories mirrored under `github_references/`
+- **Purpose**: Explore working examples before attempting assignments
+- **Verification level**: Not independently verified as unmodified official distributions
 
-### ⚠️ Quizzes (AI-GENERATED STUDY AIDS)
-- **Status**: **NOT official course quizzes**
-- **Reason**: Official quizzes are locked within Coursera platform
-- **Purpose**: Study aids for self-assessment
-- **Recommendation**: Use for review, but focus on assignments for authentic practice
+### AI-Generated Study Quizzes
+- **Status**: Not DeepLearning.AI course quiz questions
+- **Basis**: Local lecture notes and transcripts
+- **Purpose**: Optional self-assessment
+- **Recommendation**: Use the official course platform for course assessments
 
-## Available Authentic Assignments
+## Available Assignment Copies
 
 ### Module 2: Reflection Pattern
 - **Assignment**: `C1M2_Assignment.ipynb`
 - **Focus**: Build a chart generation agent with reflection/self-critique
 - **Skills**: Prompt engineering, iterative improvement, visualization
-- **Unit Tests**: Available for local validation
+- **Local Tests**: Deterministic validation without API calls
 
 ### Module 3: Tool Use Pattern  
 - **Assignment**: `C1M3_Assignment.ipynb`
 - **Focus**: Implement function calling and tool integration
 - **Skills**: API integration, structured outputs, tool selection
-- **Unit Tests**: Available for local validation
+- **Local Tests**: Deterministic validation without API calls
 
 ### Module 5: Multi-Agent Systems
 - **Assignment**: `C1M5_Assignment.ipynb`
 - **Focus**: Build coordinated multi-agent workflows
 - **Skills**: Agent orchestration, communication patterns, task decomposition
-- **Unit Tests**: Available for local validation
+- **Local Tests**: Deterministic validation without API calls
 
 ## How to Use Assignments
 
@@ -90,16 +90,16 @@ jupyter notebook C1M2_Assignment.ipynb  # Replace with appropriate module
 - Don't skip cells - later cells depend on earlier ones
 - Watch for output and error messages
 
-**Use unit tests**:
+**Use the local tests**:
 ```bash
-# Run local tests (in terminal, from assignment directory)
+# Run from the assignment directory after filling the placeholders.
 python unittests.py
 
-# Expected output when passing:
-# ✓ test_function_name_1
-# ✓ test_function_name_2
-# All tests passed!
+# Optional: verify the test harness against the supplied solution notebook.
+python unittests.py --notebook C1M2_Assignment_Solution.ipynb
 ```
+
+The runner extracts the graded functions from the selected notebook and replaces the model client with deterministic responses. It does not require API keys or network access. An untouched starter notebook should fail because its exercise placeholders are incomplete.
 
 ### 5. Iterate and Debug
 
@@ -130,58 +130,59 @@ python unittests.py
 
 ## Local Testing Setup
 
-### Understanding Unit Tests
+### Understanding Local Tests
 
-Each assignment includes `unittests.py` - automated tests that validate your implementation.
+Each graded assignment includes a self-contained `unittests.py`. The same `test_*` functions work in two ways:
+
+1. The notebook passes each completed function to its matching test helper.
+2. The command-line runner extracts all graded functions from a notebook and tests them together.
+
+The runner uses fake model responses, makes no external requests, and has no third-party Python dependencies.
 
 **How to run**:
 ```bash
-# From the assignment directory (e.g., module2_reflection/)
+# From the assignment directory, such as module2_reflection/.
 python unittests.py
 ```
 
-**Understanding output**:
-
-✅ **All tests pass**:
+**Passing output**:
 ```
-✓ test_generate_chart
-✓ test_reflection_loop
-✓ test_tool_usage
-===========================
-All 3 tests passed!
+✓ generate_draft
+✓ reflect_on_draft
+✓ revise_draft
+
+All 3 local tests passed. No API calls were made.
 ```
 
-❌ **Test failure**:
+**Expected output before completing a starter notebook**:
 ```
-✗ test_generate_chart
-  Expected: {"type": "bar", "data": [...]}
-  Got: None
-  
-1 of 3 tests failed
+✗ generate_draft: prompt must be a non-empty string
+...
+3 of 3 local tests failed.
 ```
+
+The command exits with status `0` when every test passes and status `1` when any test fails.
 
 **What to do when tests fail**:
-1. **Read the failure message** - tells you what went wrong
-2. **Check the expected vs actual output** - shows the mismatch
-3. **Review your code** in the corresponding ### START CODE HERE ### section
-4. **Add debug prints** to see intermediate values
-5. **Re-run** after fixes
+1. Read the failure message.
+2. Review the corresponding `### START CODE HERE ###` section.
+3. Correct the implementation and rerun the command.
+4. Run the notebook normally afterward to evaluate the live model output.
 
-### Autograder Limitations
+### Test Scope and Course Autograder
 
-⚠️ **Important**: The official autograder only works within Coursera platform
+**The local tests check:**
+- Required model-call arguments and message structure
+- Tool definitions and tool-result bookkeeping where applicable
+- Return types, required keys, and basic output contracts
+- Both documented input modes where applicable
 
-**What you have locally**:
-- Unit tests that validate core functionality
-- Same test logic as the autograder (where possible)
-- Immediate feedback on correctness
+**The local tests do not check:**
+- The quality or factual accuracy of live model output
+- Live OpenAI, Tavily, arXiv, or Wikipedia behavior
+- Course completion credit or platform grading
 
-**What you DON'T have locally**:
-- Official Coursera grading
-- Course completion credit
-- Some advanced integration tests that require Coursera infrastructure
-
-**Recommendation**: Local tests are sufficient for learning and practice. If you want official certification, enroll in the Coursera course.
+The copied `autograder/` directories are retained as source references. They depend on `dlai_grader` and are not involved when you run the local `unittests.py` command.
 
 ## Recommended Study Workflow
 
@@ -238,10 +239,10 @@ All 3 tests passed!
 **Why it's bad**: Breaks the assignment's test infrastructure
 **Fix**: Only edit code between `### START CODE HERE ###` and `### END CODE HERE ###`
 
-### ❌ 2. Skipping Unit Tests
-**Problem**: Running notebook cells but not `python unittests.py`
-**Why it's bad**: You might miss edge cases or incorrect behavior
-**Fix**: Always run unit tests before considering an exercise complete
+### ❌ 2. Skipping Local Tests
+**Problem**: Running notebook cells but not running the deterministic local test suite
+**Why it's bad**: Live model output can look plausible even when required arguments or tool-result messages are wired incorrectly
+**Fix**: Run `python unittests.py` after completing the placeholders, then exercise the notebook with the live model separately
 
 ### ❌ 3. Looking at Solutions Too Early
 **Problem**: Checking solution code before genuine attempt
@@ -337,16 +338,16 @@ All 3 tests passed!
 
 ## Resources
 
-### Original Course
-- **Platform**: Coursera
-- **Course**: "AI Agentic Design Patterns with AutoGen" by Andrew Ng
-- **Link**: Search "Andrew Ng Agentic AI" on Coursera
-- **Includes**: Video lectures, official quizzes (with grading), assignment autograder
+### Course
+- **Platform**: DeepLearning.AI
+- **Course**: [Agentic AI](https://learn.deeplearning.ai/courses/agentic-ai/information)
+- **Instructor**: Andrew Ng
+- **Course assessments**: Use the DeepLearning.AI learning platform for the current assessment experience
 
-### Source Repository
+### Primary Learner Repository
 - **GitHub**: [jeffmasc/agentic_ai_andrew_ng](https://github.com/jeffmasc/agentic_ai_andrew_ng)
-- **Contains**: Authentic graded assignments, ungraded demos, solutions
-- **Status**: Most faithful reproduction of official course materials available publicly
+- **Repository description**: A learner's collection of materials, assignments, and projects from the course
+- **Status here**: Source for course-derived copies; not an official DeepLearning.AI repository and not independently verified file-for-file
 
 ### Documentation
 - **OpenAI API**: https://platform.openai.com/docs/
@@ -354,8 +355,8 @@ All 3 tests passed!
 - **Prompt Engineering**: https://platform.openai.com/docs/guides/prompt-engineering
 
 ### Community
-- Course discussion forums (if enrolled in Coursera)
-- GitHub issues on jeffmasc repository for technical problems
+- DeepLearning.AI course community and support links from the course platform
+- GitHub issues on the learner repository for repository-specific technical problems
 - OpenAI developer forum for API questions
 
 ## How to Get Help
@@ -429,19 +430,19 @@ practice/
 ├── README.md (overview of materials)
 │
 ├── module2_reflection/
-│   ├── C1M2_Assignment.ipynb (✅ authentic assignment)
+│   ├── C1M2_Assignment.ipynb (course-derived assignment copy)
 │   ├── unittests.py (local validation)
 │   ├── solution/ (reference implementations)
 │   └── ungraded_demos/ (optional exploration)
 │
 ├── module3_tool_use/
-│   ├── C1M3_Assignment.ipynb (✅ authentic assignment)
+│   ├── C1M3_Assignment.ipynb (course-derived assignment copy)
 │   ├── unittests.py (local validation)
 │   ├── solution/ (reference implementations)
 │   └── ungraded_demos/ (optional exploration)
 │
 └── module5_multiagent/
-    ├── C1M5_Assignment.ipynb (✅ authentic assignment)
+    ├── C1M5_Assignment.ipynb (course-derived assignment copy)
     ├── unittests.py (local validation)
     ├── solution/ (reference implementations)
     └── ungraded_demos/ (optional exploration)
@@ -453,18 +454,21 @@ practice/
 cd module2_reflection/
 jupyter notebook C1M2_Assignment.ipynb
 
-# Run unit tests
+# Run deterministic local tests (no API key or network required)
 python unittests.py
+
+# Verify the harness against the supplied solution
+python unittests.py --notebook C1M2_Assignment_Solution.ipynb
 
 # Check test output
 # ✓ = test passed
-# ✗ = test failed (read error message)
+# ✗ = test failed (read the message; exit status will be 1)
 
 # Restart Jupyter kernel (if state is inconsistent)
 # In notebook: Kernel → Restart & Run All
 
 # View solution (after attempting)
-jupyter notebook solution/C1M2_Solution.ipynb
+jupyter notebook C1M2_Assignment_Solution.ipynb
 ```
 
 ### Learning Checklist
@@ -473,7 +477,8 @@ jupyter notebook solution/C1M2_Solution.ipynb
 - [ ] Watched corresponding lecture videos
 - [ ] Read assignment instructions completely
 - [ ] Attempted all exercise blanks (30+ min minimum)
-- [ ] All unit tests passing (`python unittests.py`)
+- [ ] Deterministic local tests pass (`python unittests.py`)
+- [ ] Exercised the completed notebook with the live model and reviewed its output
 - [ ] Compared approach with solution
 - [ ] Understood why solution works
 - [ ] Can explain the pattern to someone else
@@ -517,8 +522,6 @@ After completing assignments:
 
 ---
 
-**Remember**: These are **authentic course materials**. The assignments you're completing are the same ones used in the official Coursera course. Take them seriously, work through them thoroughly, and you'll gain the same practical skills as enrolled students.
+These local materials are intended for study and practice. Course-derived copies may differ from the current DeepLearning.AI platform, so use the official course when you need authoritative instructions, assessments, or certificate requirements.
 
-**The difference**: You won't get a certificate without Coursera enrollment, but you'll learn the patterns just as well. Focus on understanding > credential collection.
-
-Good luck, and enjoy building agentic AI systems! 🤖✨
+Focus on understanding the patterns and validating your own implementations rather than treating repository provenance as a substitute for the course platform.

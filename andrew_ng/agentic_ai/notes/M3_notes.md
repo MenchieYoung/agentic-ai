@@ -1,6 +1,6 @@
 # M3 — Tool Use (Function Calling, Interview-Oriented Notes)
 
-> Source: all 5 video transcripts of Module 3 of Andrew Ng's *Agentic AI* course + the lecture PDF.
+> Source basis: five local transcript files attributed to Module 3 course videos plus the locally stored lecture PDF.
 
 ## Module Overview
 Tool use (a.k.a. **function calling**) = giving an LLM a set of functions it can **request to be executed**, so it can do what pure text generation can't (query real-time data, compute, look up a database, operate external services). The throughline: what tools are → how to create one (the underlying mechanism) → modern syntax (aisuite + JSON Schema) → code execution (writing code beats a pile of fine-grained tools) → MCP (standardized tool connectivity).

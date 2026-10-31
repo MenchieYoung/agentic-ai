@@ -1,6 +1,6 @@
 # Module 5 - Ungraded Demo Lab 2: Multi-Agent Marketing Campaign
 
-This is an **ungraded demo lab** from the original course materials, provided for reference and practice.
+This is a **course-derived ungraded demo copy** from a public learner repository, provided for reference and practice. It has not been independently verified against the current DeepLearning.AI platform.
 
 ## Content
 - **M5_UGL_2.ipynb**: Main notebook demonstrating multi-agent collaboration for marketing campaigns
